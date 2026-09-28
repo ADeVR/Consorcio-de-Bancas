@@ -1,3 +1,19 @@
+function agregarLoteria() {
+  var nombre_loteria = document.getElementById("nombreLoteria").value;
+
+  if (nombre_loteria == "") {
+    alert("Escriba el nombre de la lotería");
+  } else {
+    var lista = document.getElementById("listaLoterias");
+
+    var nuevaLoteria = document.createElement("li");
+    nuevaLoteria.textContent = nombre_loteria;
+
+    lista.appendChild(nuevaLoteria);
+    document.getElementById("nombreLoteria").value = "";
+  }
+}
+
 function agregarSorteo() {
   var nombre_sorteo = document.getElementById("nombreSorteo").value;
   var hora_sorteo = document.getElementById("horaSorteo").value;
