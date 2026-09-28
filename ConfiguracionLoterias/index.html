@@ -1,16 +1,10 @@
-<!-- 
-  Configuración de Loterías
-  Autores: Aderson Dario Valdez Rodriguez, Robert Carlos
-  Fecha: 2026-09-20
-  Descripción: Página para configurar las loterías disponibles en el sistema.
-  -->
 <!doctype html>
 <html>
   <head>
     <title>Configuración de Loterías</title>
-    <!-- aqui busco el estilo en la carpeta css-->
-    <link rel="stylesheet" href="css/estilos.css" />
 
+    <link rel="stylesheet" href="css/estilos.css" />
+    <script src="js/script.js"></script>
   </head>
 
   <body>
@@ -18,29 +12,44 @@
 
     <h2>Loterías registradas</h2>
 
-    <p>En esta página se configurarán las diferentes loterías.</p>
+    <ul id="listaLoterias">
+      <li>LEIDSA</li>
 
-    <p>Lista de loterias disponibles:</p>
-    <ul>
-      <li>LEISA</li>
       <li>LOTEKA</li>
     </ul>
 
-    <h3>Registrar Lotería</h3>
+    <h2>Registrar Lotería</h2>
 
     <p>Nombre de la lotería:</p>
-    <input type="text" id="nombreLoteria" />
 
-    <p>Estado:</p>
-    <select>
-      <option>Activa</option>
-      <option>Inactiva</option>
-    </select>
+    <input type="text" id="nombreLoteria" />
 
     <br /><br />
 
-        <!-- aqui busco el script en la carpeta js-->
-    <script src = js/script.js></script>
     <button onclick="agregarLoteria()">Guardar</button>
+
+    <h2>Configurar Sorteo</h2>
+
+    <p>Nombre del sorteo:</p>
+
+    <input type="text" id="nombreSorteo" />
+
+    <p>Hora del sorteo:</p>
+    <input type="time" id="horaSorteo" />
+
+    <p>Dias:</p>
+    <input type="checkbox" id="lunes" /> Lunes
+    <input type="checkbox" id="martes" /> Martes
+    <input type="checkbox" id="miercoles" /> Miércoles
+    <input type="checkbox" id="jueves" /> Jueves
+    <input type="checkbox" id="viernes" /> Viernes
+    <input type="checkbox" id="sabado" /> Sábado
+    <input type="checkbox" id="domingo" /> Domingo
+     <br /><br />
+
+    <button onclick="agregarSorteo()">Guardar Sorteo</button>
+
+    <h2>Sorteos configurados</h2>
+    <ul id="listaSorteos"></ul>
   </body>
 </html>
