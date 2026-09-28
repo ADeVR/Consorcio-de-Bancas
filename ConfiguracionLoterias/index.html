@@ -10,8 +10,7 @@
     <title>Configuración de Loterías</title>
     <!-- aqui busco el estilo en la carpeta css-->
     <link rel="stylesheet" href="css/estilos.css" />
-    <!-- aqui busco el script en la carpeta js-->
-    <script src = js/script.js></script>
+
   </head>
 
   <body>
@@ -30,7 +29,7 @@
     <h3>Registrar Lotería</h3>
 
     <p>Nombre de la lotería:</p>
-    <input type="text" />
+    <input type="text" id="nombreLoteria" />
 
     <p>Estado:</p>
     <select>
@@ -40,6 +39,8 @@
 
     <br /><br />
 
-    <button>Guardar</button>
+        <!-- aqui busco el script en la carpeta js-->
+    <script src = js/script.js></script>
+    <button onclick="agregarLoteria()">Guardar</button>
   </body>
 </html>
