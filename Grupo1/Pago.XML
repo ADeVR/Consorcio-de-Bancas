@@ -1,8 +1,0 @@
-// Datos de ejemplo en formato XML para el pago del premio 
-<?xml version="1.0" encoding="UTF-8"?>
-<pago>
-  <boleto numero="12345" modalidad="Quiniela" jugada="12-34" sorteo="2026"/>
-  <monto>5000</monto>
-  <tipo>transferencia</tipo>
-  <estado>pendiente</estado>
-</pago>
