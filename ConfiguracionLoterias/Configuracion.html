@@ -1,55 +1,142 @@
-<!doctype html>
-<html>
-  <head>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Configuración de Loterías</title>
 
-    <link rel="stylesheet" href="css/estilos.css" />
-    <script src="js/script.js"></script>
-  </head>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
 
-  <body>
+<body>
+
     <h1>Configuración de Loterías</h1>
+
+    <h2>Registrar lotería</h2>
+
+    <input type="text" id="nombreLoteria"
+        placeholder="Nombre de la lotería">
+
+    <button onclick="agregarLoteria()">Guardar lotería</button>
 
     <h2>Loterías registradas</h2>
 
-    <ul id="listaLoterias">
-      <li>LEIDSA</li>
+    <ul id="listaLoterias"></ul>
 
-      <li>LOTEKA</li>
-    </ul>
+    <hr>
 
-    <h2>Registrar Lotería</h2>
+    <h2>Registrar sorteo</h2>
 
-    <p>Nombre de la lotería:</p>
+    <label>Lotería:</label>
+    <select id="loteriaSorteo"></select>
 
-    <input type="text" id="nombreLoteria" />
+    <label>Nombre del sorteo:</label>
+    <input type="text" id="nombreSorteo"
+        placeholder="Ej. Sorteo de la tarde">
 
-    <br /><br />
+    <label>Hora:</label>
+    <input type="time" id="horaSorteo">
 
-    <button onclick="agregarLoteria()">Guardar</button>
+    <p>Días del sorteo:</p>
 
-    <h2>Configurar Sorteo</h2>
+    <div class="dias">
+        <label><input type="checkbox" value="Lunes"> Lunes</label>
+        <label><input type="checkbox" value="Martes"> Martes</label>
+        <label><input type="checkbox" value="Miércoles"> Miércoles</label>
+        <label><input type="checkbox" value="Jueves"> Jueves</label>
+        <label><input type="checkbox" value="Viernes"> Viernes</label>
+        <label><input type="checkbox" value="Sábado"> Sábado</label>
+        <label><input type="checkbox" value="Domingo"> Domingo</label>
+    </div>
 
-    <p>Nombre del sorteo:</p>
+    <button onclick="agregarSorteo()">Guardar sorteo</button>
 
-    <input type="text" id="nombreSorteo" />
+    <h2>Sorteos registrados</h2>
 
-    <p>Hora del sorteo:</p>
-    <input type="time" id="horaSorteo" />
-
-    <p>Dias:</p>
-    <input type="checkbox" id="lunes" /> Lunes
-    <input type="checkbox" id="martes" /> Martes
-    <input type="checkbox" id="miercoles" /> Miércoles
-    <input type="checkbox" id="jueves" /> Jueves
-    <input type="checkbox" id="viernes" /> Viernes
-    <input type="checkbox" id="sabado" /> Sábado
-    <input type="checkbox" id="domingo" /> Domingo
-     <br /><br />
-
-    <button onclick="agregarSorteo()">Guardar Sorteo</button>
-
-    <h2>Sorteos configurados</h2>
     <ul id="listaSorteos"></ul>
-  </body>
+
+    <hr>
+
+    <h2>Configurar modalidad y premios</h2>
+
+    <label>Sorteo:</label>
+    <select id="sorteoJuego"></select>
+
+    <label>Modalidad:</label>
+    <select id="modalidad">
+        <option value="Quiniela">Quiniela</option>
+        <option value="Palé">Palé</option>
+        <option value="Tripleta">Tripleta</option>
+        <option value="Primera">Primera</option>
+        <option value="Segunda">Segunda</option>
+        <option value="Tercera">Tercera</option>
+        <option value="Pega 3">Pega 3</option>
+        <option value="Otra">Otra</option>
+    </select>
+
+    <label>Cantidad de números:</label>
+    <input type="number" id="cantidadNumeros" min="1" value="1">
+
+    <div class="fila">
+        <div>
+            <label>Número mínimo:</label>
+            <input type="text" id="numeroMinimo" value="00">
+        </div>
+
+        <div>
+            <label>Número máximo:</label>
+            <input type="text" id="numeroMaximo" value="99">
+        </div>
+    </div>
+
+    <label>Monto mínimo de apuesta (RD$):</label>
+    <input type="number" id="montoMinimo" min="0" step="0.01" value="1">
+
+    <label>Monto máximo de apuesta (RD$):</label>
+    <input type="number" id="montoMaximo" min="0" step="0.01" value="1000">
+
+    <h3>Premio por cada RD$1 apostado</h3>
+
+    <p>Escribe el pago correspondiente a cada posición o modalidad.
+        Deja en blanco los que no apliquen.</p>
+
+    <div class="fila">
+        <div>
+            <label>Primera (RD$):</label>
+            <input type="number" id="premioPrimera" min="0" step="0.01">
+        </div>
+
+        <div>
+            <label>Segunda (RD$):</label>
+            <input type="number" id="premioSegunda" min="0" step="0.01">
+        </div>
+
+        <div>
+            <label>Tercera (RD$):</label>
+            <input type="number" id="premioTercera" min="0" step="0.01">
+        </div>
+
+        <div>
+            <label>Palé (RD$):</label>
+            <input type="number" id="premioPale" min="0" step="0.01">
+        </div>
+
+        <div>
+            <label>Tripleta (RD$):</label>
+            <input type="number" id="premioTripleta" min="0" step="0.01">
+        </div>
+    </div>
+
+    <button onclick="agregarJuego()">Guardar modalidad</button>
+
+    <h2>Modalidades configuradas</h2>
+
+    <ul id="listaJuegos"></ul>
+
+    <script src="js/script.js"></script>
+
+</body>
 </html>
