@@ -1,0 +1,67 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuracionLoterias>
+
+    <loterias>
+        <loteria id="LOT001">
+            <nombre>LEIDSA</nombre>
+            <activa>true</activa>
+
+            <sorteos>
+                <sorteo id="SOR001">
+                    <nombre>Sorteo de la tarde</nombre>
+                    <activo>true</activo>
+
+                    <horarios>
+                        <horario>
+                            <dia>Lunes</dia>
+                            <horaApertura>12:00</horaApertura>
+                            <horaCierre>20:45</horaCierre>
+                            <horaSorteo>20:55</horaSorteo>
+                        </horario>
+
+                        <horario>
+                            <dia>Martes</dia>
+                            <horaApertura>12:00</horaApertura>
+                            <horaCierre>20:45</horaCierre>
+                            <horaSorteo>20:55</horaSorteo>
+                        </horario>
+                    </horarios>
+
+                    <modalidades>
+                        <modalidad id="MOD001">
+                            <nombre>Quiniela</nombre>
+                            <activa>true</activa>
+
+                            <cantidadNumeros>1</cantidadNumeros>
+                            <numeroMinimo>00</numeroMinimo>
+                            <numeroMaximo>99</numeroMaximo>
+
+                            <montoMinimo>1</montoMinimo>
+                            <montoMaximo>1000</montoMaximo>
+
+                            <premios>
+                                <premio>
+                                    <posicion>Primera</posicion>
+                                    <pagoPorPeso>0</pagoPorPeso>
+                                </premio>
+
+                                <premio>
+                                    <posicion>Segunda</posicion>
+                                    <pagoPorPeso>0</pagoPorPeso>
+                                </premio>
+
+                                <premio>
+                                    <posicion>Tercera</posicion>
+                                    <pagoPorPeso>0</pagoPorPeso>
+                                </premio>
+                            </premios>
+                        </modalidad>
+                    </modalidades>
+                </sorteo>
+            </sorteos>
+        </loteria>
+    </loterias>
+
+</configuracionLoterias>
