@@ -187,3 +187,27 @@ h2 {
 .comprobante-box:empty::before {
   content: "Aún no se ha generado ningún comprobante.";
 }
+/* Codigo Estilos Tabla y Botones De Boletos */
+#numero-boleto {
+  width: 350px;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: lightyellow;
+}
+
+
+.btn-pagar {
+    background-color: #198754;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-pagar:hover {
+    background-color: #146c43;
+}
