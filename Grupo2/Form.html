@@ -54,33 +54,35 @@
         <tbody id="lista-boletos">
           <tr>
             <td class="numero-boleto">001</td>
-            <td>001</td>
             <td>Quiniela</td>
             <td>15-28-36</td>
             <td>Sorteo del domingo</td>
             <td>Pendiente de pago</td>
             <td>10,000</td>
+                
             <td class="columna-accion"></td>
             
           </tr>
           <tr>
             <td class="numero-boleto">002</td>
-            <td>002</td>
+           
             <td>Palé</td>
             <td>15-28</td>
             <td>Sorteo del miercoles</td>
             <td>Pendiente de pago</td>
             <td>15,000</td>
+          
             <td class="columna-accion"></td>
           </tr>
           <tr>
             <td class="numero-boleto">003</td>
-            <td>003</td>
+            
             <td>Tripleta</td>
             <td>15-28-36</td>
             <td>Sorteo del sabado</td>
             <td>Pendiente de pago</td>
             <td>20,000</td>
+          
             <td class="columna-accion"></td>
           </tr>
         </tbody>
@@ -89,73 +91,52 @@
   </section>
   <!----Plantilla Para JS -->
   <template id="plantilla-boleto">
-    <tr>
-      <td class="numero"></td>
-      <td class="modalidad"></td>
-      <td class="jugada"></td>
-      <td class="sorteo"></td>
-      <td class="estado"></td>
-      <td class="premio"></td>
-      <td class="celda-opciones"></td>
-    </tr>
-  </template>
-      
+  <tr>
+    <td class="numero"></td>
+    <td class="modalidad"></td>
+    <td class="jugada"></td>
+    <td class="sorteo"></td>
+    <td class="estado"></td>
+    <td class="premio"></td>
+    <td class="columna-accion">
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary btn-sm dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Metodo de pago
+        </button>
+
+        <ul class="dropdown-menu">
+          <li>
+            <button
+              class="dropdown-item"
+              type="button"
+              data-metodo="efectivo"
+            >
+              Efectivo
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="dropdown-item"
+              type="button"
+              data-metodo="transferencia"
+            >
+              Transferencia
+            </button>
+          </li>
+        </ul>
+      </div>
+    </td>
+  </tr>
+</template>
 
          <!--============================================================== -->
 
-
-    <!--  
- <section>
-    <h2>Consulta del boleto</h2>
-    <div class="form-group d-flex align-items-center gap-2">
-     <label for="numero-boleto">Numero de boleto:</label>
-     <input type="number" id="numero-boleto" class="form-control">
-    </div>
-
-    <div class="form-group">
-     <button id="btn-verificar" class="btn btn-outline-success">Verificar boleto</button>
-    </div>
-     <p id="resultado-verificacion"class="resultado"></p>
-    </section> 
-  -->
-
-    <!-- ===================================================== -->
-    <!-- INICIO DE LOS NUEVOS ELEMENTOS DEL DIAGRAMA -->
-    <!-- ===================================================== -->
-
-      
-
-
-
-    <!-- Datos del boleto -->
-
-     <!----
-    <section>
-    <h2>Datos del boleto</h2>
-
-    <div class="form-group d-flex align-items-center gap-2">
-     <label for="modalidad">Modalidad:</label>
-     <input type="text" id="modalidad" class="form-control" readonly>
-    </div>
-
-    <div class="form-group d-flex align-items-center gap-2">
-     <label for="jugada">Jugada:</label>
-     <input type="text" id="jugada" class="form-control" readonly>
-    </div>
-
-    <div class="form-group d-flex align-items-center gap-2">
-     <label for="sorteo">Sorteo asociado:</label>
-     <input type="text" id="sorteo" class="form-control" readonly>
-    </div>
-
-    <p id="estado-boleto" class="resultado"></p>
-
-    <p id="resultado-ganador" class="resultado"></p>
-
-    </section>
-           -->
-
-    <!-- Datos del premio -->
 
  <section>
     <h2>Datos del premio</h2>
