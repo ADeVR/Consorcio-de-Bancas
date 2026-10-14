@@ -1,8 +1,32 @@
 // Datos de ejemplo en formato XML para el pago del premio 
 <?xml version="1.0" encoding="UTF-8"?>
 <pago>
-  <boleto numero="12345" modalidad="Quiniela" jugada="12-34" sorteo="2026"/>
-  <monto>5000</monto>
-  <tipo>transferencia</tipo>
-  <estado>pendiente</estado>
-</pago>
+
+    <boleto>
+        <numero>001</numero>
+        <modalidad>Quiniela</modalidad>
+        <jugada>15-28-36</jugada>
+        <sorteo>Sorteo del domingo</sorteo>
+        <premio>10000</premio>
+        <estado>Pendiente</estado>
+    </boleto>
+
+    <boleto>
+        <numero>002</numero>
+        <modalidad>Palé</modalidad>
+        <jugada>15-28</jugada>
+        <sorteo>Sorteo del miércoles</sorteo>
+        <premio>15000</premio>
+        <estado>Pendiente</estado>
+    </boleto>
+
+    <boleto>
+        <numero>003</numero>
+        <modalidad>Tripleta</modalidad>
+        <jugada>15-28-36</jugada>
+        <sorteo>Sorteo del sábado</sorteo>
+        <premio>20000</premio>
+        <estado>Pendiente</estado>
+    </boleto>
+
+  </pago>
