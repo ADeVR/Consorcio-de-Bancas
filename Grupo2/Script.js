@@ -13,7 +13,15 @@ class BotonPagar {
     }
  
 }
- 
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".columna-accion").forEach(function (celda) {
+    const fila = celda.closest("tr");
+    const numeroBoleto = fila.querySelector(".numero-boleto").textContent.trim();
+
+    celda.innerHTML = BotonPagar.crear(numeroBoleto);
+  });
+});
 
 //VARIABLES GLOBALES
 
