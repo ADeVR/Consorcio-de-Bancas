@@ -6,9 +6,8 @@
   /* ---- Marco superior ---- */
   --color-marco-fondo: #05422d;
   /* ---- Textos ---- */
-  --color-verde-texto: #417564;
+  --color-verde-texto: #0b3527;
   --color-texto-principal: #1E2A24;
-  --color-texto-btn2: #eaebea;
   /* ---- Fondos ---- */
   --color-fondo-pagina: #F4F7F5;
   --color-fondo-tarjeta: #fdfdfd;
@@ -16,18 +15,18 @@
   --color-acento-borde: #31d171;
   --color-foco-input: #83e45c;
   /* ---- Botón "Pagar" ---- */
-  --color-pagar-fondo: #dbaf50;
-  --color-pagar-hover: #f3ab1a;
-  --color-pagar-sombra: #5c3202;
-  --color-pagar-sombra2: #fd8700;
+  --color-pagar-fondo: #066f2e;
+  --color-pagar-hover: #59f75e;
+  --color-pagar-sombra: #0e0b07;
+  --color-pagar-sombra2: #35a1ff;
 }
-
-* { box-sizing: border-box; }
 
 body {
   margin: 0;
   background: var(--color-fondo-pagina);
   font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--color-fondo-tarjeta);
+
 }
 
 /* ---- Marco superior ---- */
@@ -56,7 +55,7 @@ body {
 .ticket {
   position: relative;
   background: var(--color-fondo-tarjeta);
-  max-width: 560px;
+  max-width: 1000px;
   margin: 0 auto 48px;
   box-shadow: 0 2px 14px var(--color-acento-borde);
   border-radius: 6px;
@@ -65,9 +64,13 @@ body {
 }
 
 .ticket section {
-  padding: 28px 32px;
-  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin:  auto;
+  padding: 1rem;
+  box-sizing: border-box;
 }
+
 
 /* ---- Línea de perforación entre secciones ---- */
 .ticket section:not(:first-of-type) {
@@ -76,17 +79,14 @@ body {
 
 .ticket section:not(:first-of-type)::before,
 .ticket section:not(:first-of-type)::after {
-  content: "";
   position: absolute;
   top: -11px;
   width: 20px;
   height: 20px;
   background: var(--color-fondo-pagina);
   border-radius: 50%;
-}
+ }
 
-.ticket section:not(:first-of-type)::before { left: -10px; }
-.ticket section:not(:first-of-type)::after  { right: -10px; }
 
 /* ---- Títulos de sección ---- */
 h2 {
@@ -95,30 +95,24 @@ h2 {
   color: var(--color-verde-texto);
   margin-top: 0;
   margin-bottom: 18px;
+  font-weight: 650;
 }
 
 /* ---- Formulario ---- */
 .form-group {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.form-group > .btn {
-  grid-column: 2;
-}
-
-.form-group label {
-  width: 190px;
-  flex-shrink: 0;
-  font-size: 22px;
+  grid-template-columns: 150px 1fr;
+  font-size: 20px;
   color: var(--color-texto-principal);
   font-weight: 600;
-  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.form-control, .form-select {
+.table {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+}
+
+.form-select {  
   border: 1px solid var(--color-texto-principal);
   border-radius: 4px;
   width: 150px;
@@ -126,42 +120,17 @@ h2 {
   font-size: 17px;
 }
 
-.form-control:focus, .form-select:focus {
-  font-weight: 600;
-  font-size: 17px;
-  border-color: var(--color-verde-texto);
-  color: var(--color-foco-input);
-  box-shadow: 0 0 0 4px var(--color-fondo-tarjeta);
-}
-
-/* --- Botón "Verificar" ---- */
-.btn-outline-success {
-  margin-top: 20px;
-  width: 190px;
-  height: 40px;
-  border-color: var(--color-verde-texto);
-  font-weight: 900;
-  font-size: 20px;
-  border-radius: 4px;
-}
-
-.btn-outline-success:hover {
-  background: var(--color-verde-texto);
-  color: var(--color-marco-fondo);
-}
-
-/* ---- Botón "Pagar" ---- */
 .btn-pagar {
   font-family: Arial, sans-serif;
   margin-top: 20px;
-  width: 155px;
-  height: 40px;
+  height: 40px; 
   background: var(--color-pagar-fondo);
   border: 1px solid var(--color-pagar-sombra);
   color: var(--color-fondo-pagina);
   font-weight: 900;
   font-size: 20px;
   border-radius: 4px;
+  
 }
 
 .btn-pagar:hover {
@@ -186,28 +155,4 @@ h2 {
 
 .comprobante-box:empty::before {
   content: "Aún no se ha generado ningún comprobante.";
-}
-/* Codigo Estilos Tabla y Botones De Boletos */
-#numero-boleto {
-  width: 350px;
-  height: 30px;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: lightyellow;
-}
-
-
-.btn-pagar {
-    background-color: #198754;
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-pagar:hover {
-    background-color: #146c43;
 }
