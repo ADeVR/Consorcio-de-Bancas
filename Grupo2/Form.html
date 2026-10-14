@@ -40,12 +40,13 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Número</th>
+            <th scope="col">Numero</th>
             <th scope="col">Modalidad</th>
             <th scope="col">Jugada</th>
             <th scope="col">Sorteo asociado</th>
             <th scope="col">Estado</th>
             <th scope="col">Premio</th>
+            <th scope="col"></th>
             <th scope="col">Acciones</th>
           </tr>
         </thead>
@@ -56,21 +57,34 @@
             <td>Quiniela</td>
             <td>15-28-36</td>
             <td>Sorteo del domingo</td>
-            <td>Pendiente de pago</td>
+            <td>Pendiente</td>
             <td>10,000</td>
-                
+           <td> <select
+    class="form-select form-select-sm metodo-pago"
+    aria-label="Metodo de pago"
+  >
+    <option value="efectivo" selected>Efectivo</option>
+    <option value="transferencia">Transferencia</option>
+  </select>     </td>  
             <td class="columna-accion"></td>
             
           </tr>
           <tr>
             <td class="numero-boleto">002</td>
+            
            
             <td>Palé</td>
             <td>15-28</td>
             <td>Sorteo del miercoles</td>
-            <td>Pendiente de pago</td>
+            <td>Pendiente</td>
             <td>15,000</td>
-          
+          <td> <select
+    class="form-select form-select-sm metodo-pago"
+    aria-label="Metodo de pago"
+  >
+    <option value="efectivo" selected>Efectivo</option>
+    <option value="transferencia">Transferencia</option>
+  </select> </td>  
             <td class="columna-accion"></td>
           </tr>
           <tr>
@@ -79,9 +93,15 @@
             <td>Tripleta</td>
             <td>15-28-36</td>
             <td>Sorteo del sabado</td>
-            <td>Pendiente de pago</td>
+            <td>Pendiente</td>
             <td>20,000</td>
-          
+           <td> <select
+    class="form-select form-select-sm metodo-pago"
+    aria-label="Metodo de pago"
+  >
+    <option value="efectivo" selected>Efectivo</option>
+    <option value="transferencia">Transferencia</option>
+  </select> </td>  
             <td class="columna-accion"></td>
           </tr>
         </tbody>
@@ -136,72 +156,6 @@
 
          <!--============================================================== -->
 
-
- <section>
-    <h2>Datos del premio</h2>
-
-    <div class="form-group d-flex flex-column flex-md-row align-items-md-start gap-2">
-     <label for="monto-premio">Monto del premio:</label>
-     <input type="number" id="monto-premio" class="form-control" readonly>
-    </div>
-        
-    <div class="form-group d-flex flex-column flex-md-row align-items-md-start gap-2">
-     <label for="tipo-pago">Tipo de pago:</label>
-     <select id="tipo-pago" class="form-select">
-     <option value="efectivo">Efectivo</option>
-     <option value="transferencia">Transferencia</option>
-     <option value="saldo">Saldo</option>
- </select>
-    </div>
- 
-
- 
-    <!-- Datos de transferencia -->
- <!--
-    <div id="campos-transferencia" class="form-group d-flex align-items-center gap-2">
-     <label for="cuenta-destino">Cuenta de destino:</label>
-     <input type="number" id="cuenta-destino" class="form-control">
-    </div>
-
-    <div class="form-group">
-     <button id="btn-pagar" class="btn btn-pagar">Pagar</button>
-    </div>
-
- </section>
-     
--->
-
-    <!-- Control de reclamaciones -->
-
-    <section id="control-reclamaciones">
-
-    <h2>Control de reclamaciones</h2>
-
-    <div class="form-group d-flex flex-column flex-md-row align-items-md-start gap-2">
-
-     <label for="estado-reclamacion">
-        Estado de la reclamacion:
-     </label>
-
-     <select id="estado-reclamacion" class="form-select">
-
-        <option value="">
-            Seleccione una opcion
-        </option>
-
-        <option value="pendiente">
-            Pendiente
-        </option>
-
-        <option value="reclamado">
-            Reclamado
-        </option>
-
-        <option value="pagado">
-            Pagado
-        </option>
-
-     </select>
 
     </div>
 
