@@ -110,6 +110,7 @@ h2 {
 .table {
   font-family: Arial, sans-serif;
   font-size: 20px;
+  
 }
 
 .form-select {  
@@ -119,10 +120,16 @@ h2 {
   padding: 6px 10px;
   font-size: 17px;
 }
+.cuenta-cliente {
+  width: 150px;
+  margin-top: 6px;
+  font-size: 15px;
+  border: 1px solid var(--color-texto-principal);
+  border-radius: 4px;
+}
 
 .btn-pagar {
   font-family: Arial, sans-serif;
-  margin-top: 20px;
   height: 40px; 
   background: var(--color-pagar-fondo);
   border: 1px solid var(--color-pagar-sombra);
@@ -130,17 +137,35 @@ h2 {
   font-weight: 900;
   font-size: 20px;
   border-radius: 4px;
-  position: 20px;
   display: inline-block;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .btn-pagar:hover {
+  font-family: Arial, sans-serif;
+  height: 40px; 
   background: var(--color-pagar-hover);
-  color: var(--color-texto-btn2);
+  color: var(--color-texto-sombra);
   border-color: var(--color-pagar-sombra2);
+  font-weight: 900;
+  font-size: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0;
 }
-
+btn-pagado {
+  font-family: Arial, sans-serif;
+  height: 40px; 
+  background: var(--color-pagar-fondo);
+  border: 1px solid var(--color-pagar-sombra);
+  color: var(--color-fondo-pagina);
+  font-weight: 900;
+  font-size: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0;
+opacity: 1 !important;
+}
 .resultado {
   color: var(--color-verde-texto);
 }
