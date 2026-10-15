@@ -96,3 +96,37 @@ hr {
     border: 2px solid #dc3545;
     background-color: #fff0f0;
 }
+
+/* Espaciado general */
+body {
+    min-height: 100vh;
+}
+
+/* Separación entre los elementos de las listas */
+#listaLoterias li,
+#listaSorteos li,
+#listaJuegos li {
+    padding: 12px 16px;
+    border-bottom: 1px solid #dee2e6;
+    overflow-wrap: anywhere;
+}
+
+/* Evitar bordes innecesarios en el último elemento */
+#listaLoterias li:last-child,
+#listaSorteos li:last-child,
+#listaJuegos li:last-child {
+    border-bottom: none;
+}
+
+/* Campo marcado por la validación de jQuery */
+.campo-error {
+    border: 2px solid #dc3545 !important;
+    background-color: #fff0f0;
+}
+
+/* Transición suave de los campos */
+.form-control,
+.form-select {
+    transition: border-color 0.15s ease-in-out,
+                box-shadow 0.15s ease-in-out;
+}
