@@ -130,7 +130,9 @@ h2 {
   font-weight: 900;
   font-size: 20px;
   border-radius: 4px;
-  
+  position: 20px;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 .btn-pagar:hover {
