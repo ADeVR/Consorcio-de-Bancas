@@ -153,7 +153,7 @@ h2 {
   display: inline-block;
   margin: 0;
 }
-,btn-pagado {
+btn-pagado {
   font-family: Arial, sans-serif;
   height: 40px; 
   background: var(--color-pagar-fondo);
