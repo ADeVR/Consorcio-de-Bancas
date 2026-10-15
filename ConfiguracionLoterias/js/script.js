@@ -259,3 +259,37 @@ function actualizarJuegos() {
 
 actualizarLoterias();
 actualizarSorteos();
+
+$(document).ready(function () {
+
+    // Detectar cuando se pulsa el botón Guardar lotería
+    $("#btnAgregarLoteria").on("click", function () {
+
+        var nombre = $("#nombreLoteria").val().trim();
+
+        // Validar que el nombre no esté vacío
+        if (nombre === "") {
+            alert("Escriba el nombre de la lotería");
+            $("#nombreLoteria").focus();
+            return;
+        }
+
+        // Reutilizar tu función existente
+        agregarLoteria();
+
+    });
+
+    // Validar el campo mientras el usuario escribe
+    $("#nombreLoteria").on("input", function () {
+
+        var nombre = $(this).val().trim();
+
+        if (nombre === "") {
+            $(this).addClass("campo-error");
+        } else {
+            $(this).removeClass("campo-error");
+        }
+
+    });
+
+});
