@@ -20,7 +20,13 @@
     <input type="text" id="nombreLoteria"
         placeholder="Nombre de la lotería">
 
-    <button onclick="agregarLoteria()">Guardar lotería</button>
+    <!--Anteriorior sin Jquery    
+    <!-- <button onclick="agregarLoteria()">Guardar lotería</button> -->
+    
+    <!--Actual con Jquery   -->
+    <button id="btnAgregarLoteria" type="button">
+        Guardar lotería
+    </button>
 
     <h2>Loterías registradas</h2>
 
@@ -136,7 +142,11 @@
 
     <ul id="listaJuegos"></ul>
 
-    <script src="js/script.js"></script>
+<!-- Biblioteca jQuery desde internet-->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Nuestro código JavaScript -->
+<script src="js/script.js"></script>
 
 </body>
 </html>

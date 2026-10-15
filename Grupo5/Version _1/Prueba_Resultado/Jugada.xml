@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jugadas>
+
+    <jugada>
+        <codigoTicket>TCK-001</codigoTicket>
+        <loteria>Lotería 1</loteria>
+        <modalidad>Quiniela</modalidad>
+        <numero>25</numero>
+        <posicion>Primera</posicion>
+    </jugada>
+
+    <jugada>
+        <codigoTicket>TCK-002</codigoTicket>
+        <loteria>Lotería 1</loteria>
+        <modalidad>Quiniela</modalidad>
+        <numero>14</numero>
+        <posicion>Segunda</posicion>
+    </jugada>
+
+    <jugada>
+        <codigoTicket>TCK-003</codigoTicket>
+        <loteria>Lotería 1</loteria>
+        <modalidad>Quiniela</modalidad>
+        <numero>55</numero>
+        <posicion>Primera</posicion>
+    </jugada>
+
+    <jugada>
+        <codigoTicket>TCK-004</codigoTicket>
+        <loteria>Lotería 1</loteria>
+        <modalidad>Quiniela</modalidad>
+        <numero>07</numero>
+        <posicion>Tercera</posicion>
+    </jugada>
+
+</jugadas>
