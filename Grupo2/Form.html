@@ -6,306 +6,62 @@
     <title>Pagos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
-   
-   <!-- <script defer src="Script.js" ></script>-->
-   <title>Boletos ganadores</title>
+
 </head>
 
 <body>
     <header class="masthead">
-     <img src="image/logo.jpeg" alt="logo de modulo" class="logo">
+        <img src="image/logo.jpeg" alt="logo de modulo" class="logo">
     </header>
-
+ 
     <!-- Aqui se encuentra el formulario para consultar el boleto y realizar el pago del premio correspondiente. -->
     <h1 class="ticket-title">Pantalla de Pagos</h1>
+
     <div class="ticket">
- 
-       <!--====================================================== --> 
-         <!-- Seccion Tabla-->
-          
-  <section>
-    <h2>Boletos ganadores</h2>
 
-    <div class="form-group"> 
-      <label for="numero-boleto">Buscar boleto:</label>
-      <input
-        type="search"
-        id="numero-boleto"
-        class="form-control buscar-boleto"
-        placeholder="Escribe el número del boleto"
-      >
-    </div>
+        <section>
+            <h2>Boletos ganadores</h2>
 
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Número</th>
-            <th scope="col">Modalidad</th>
-            <th scope="col">Jugada</th>
-            <th scope="col">Sorteo asociado</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Premio</th>
-            <th scope="col"></th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
+            <div class="form-group">
+                <label for="numero-boleto">Buscar boleto:</label>
+                <input
+                    type="search"
+                    id="numero-boleto"
+                    class="form-control buscar-boleto"
+                    placeholder="Escribe el número del boleto">
+            </div>
 
-        <tbody id="lista-boletos">
-          <tr>
-            <td class="numero-boleto">001</td>
-            <td>Quiniela</td>
-            <td>15-28-36</td>
-            <td>Sorteo del domingo</td>
-            <td>Pendiente</td>
-            <td>10,000</td>
-           <td> <select
-    class="form-select form-select-sm metodo-pago"
-    aria-label="Metodo de pago"
-  >
-    <option value="efectivo" selected>Efectivo</option>
-    <option value="transferencia">Transferencia</option>
-  </select>     </td>  
-            <td class="columna-accion"></td>
-            
-          </tr>
-          <tr>
-            <td class="numero-boleto">002</td>
-            
-           
-            <td>Palé</td>
-            <td>15-28</td>
-            <td>Sorteo del miercoles</td>
-            <td>Pendiente</td>
-            <td>15,000</td>
-          <td> <select
-    class="form-select form-select-sm metodo-pago"
-    aria-label="Metodo de pago"
-  >
-    <option value="efectivo" selected>Efectivo</option>
-    <option value="transferencia">Transferencia</option>
-  </select> </td>  
-            <td class="columna-accion"></td>
-          </tr>
-          <tr>
-            <td class="numero-boleto">003</td>
-            
-            <td>Tripleta</td>
-            <td>15-28-36</td>
-            <td>Sorteo del sabado</td>
-            <td>Pendiente</td>
-            <td>20,000</td>
-           <td> <select
-    class="form-select form-select-sm metodo-pago"
-    aria-label="Metodo de pago"
-  >
-    <option value="efectivo" selected>Efectivo</option>
-    <option value="transferencia">Transferencia</option>
-  </select> </td>  
-            <td class="columna-accion"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  <!----Plantilla Para JS -->
-  <template id="plantilla-boleto">
-  <tr>
-    <td class="numero"></td>
-    <td class="modalidad"></td>
-    <td class="jugada"></td>
-    <td class="sorteo"></td>
-    <td class="estado"></td>
-    <td class="premio"></td>
-    <td class="columna-accion">
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary btn-sm dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Metodo de pago
-        </button>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Número</th>
+                            <th scope="col">Modalidad</th>
+                            <th scope="col">Jugada</th>
+                            <th scope="col">Sorteo asociado</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Premio</th>
+                            <th scope="col">Método de pago</th>
+                            <th scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-boletos"></tbody>
+                </table>
+            </div>
 
-        <ul class="dropdown-menu">
-          <li>
-            <button
-              class="dropdown-item"
-              type="button"
-              data-metodo="efectivo"
-            >
-              Efectivo
-            </button>
-          </li>
+            <p id="resultado-reclamacion" class="resultado"></p>
+        </section>
 
-          <li>
-            <button
-              class="dropdown-item"
-              type="button"
-              data-metodo="transferencia"
-            >
-              Transferencia
-            </button>
-          </li>
-        </ul>
-      </div>
-    </td>
-  </tr>
-</template>
+        <section>
+            <h2>Comprobante</h2>
+            <div id="comprobante" class="comprobante-box"></div>
+        </section>
 
-         <!--============================================================== -->
-
-
-    
-
-    <p id="resultado-reclamacion" class="resultado"></p>
-
-    </section>
-
-
-    <!-- ===================================================== -->
-    <!-- FIN DE LOS NUEVOS ELEMENTOS DEL DIAGRAMA -->
-    <!-- ===================================================== -->
-
-       <!-- Cuenta De Destino  -->
-
-      
-    <div id="campos-transferencia" class="form-group d-flex align-items-center gap-2">
-     <label for="cuenta-destino">Cuenta de destino:</label>
-     <input type="number" id="cuenta-destino" class="form-control">
-    </div>
-
-    <div class="form-group">
-     <button id="btn-pagar" class="btn btn-pagar">Pagar</button>
-    </div>
-
- </section>
-
-    <!-- Comprobante -->
-
-    <section>
-    <h2>Comprobante</h2>
-    <div id="comprobante" class="comprobante-box"></div>
-    </section>
-
-</div>
-    <script>
-
-  // Referencias a elementos
-
-  const btnVerificar = document.getElementById("btn-verificar");
-  const resultadoVerificacion = document.getElementById("resultado-verificacion");
-  const modalidad = document.getElementById("modalidad");
-  const jugada = document.getElementById("jugada");
-  const sorteo = document.getElementById("sorteo");
-  const estadoBoleto = document.getElementById("estado-boleto");
-  const resultadoGanador = document.getElementById("resultado-ganador");
-  const montoPremio = document.getElementById("monto-premio");
-  const tipoPago = document.getElementById("tipo-pago");
-  const camposTransferencia = document.getElementById("campos-transferencia");
-  const btnPagar = document.getElementById("btn-pagar");
-  const comprobante = document.getElementById("comprobante");
-
-  const estadoReclamacion = document.getElementById("estado-reclamacion");
-  const resultadoReclamacion = document.getElementById("resultado-reclamacion");
-
-
-  // Simulación de verificación de boleto
-
-  btnVerificar.addEventListener("click", () => {
-
-    const numero = document.getElementById("numero-boleto").value;
-
-    if(numero === "12345"){ 
-
-      resultadoVerificacion.textContent = "Boleto válido";
-      modalidad.value = "Quiniela";
-      jugada.value = "12-34";
-      sorteo.value = "Sorteo #2026";
-      estadoBoleto.textContent = "Estado: Activo";
-      resultadoGanador.textContent = "Ganador";
-      montoPremio.value = 5000;
-
-    } else {
-
-      resultadoVerificacion.textContent = "Boleto no válido";
-      modalidad.value = "";
-      jugada.value = "";
-      sorteo.value = "";
-      estadoBoleto.textContent = "";
-      resultadoGanador.textContent = "";
-      montoPremio.value = 0;
-
-    }
-
-  });
-
-
-  // Mostrar u ocultar campos según tipo de pago
-
-  tipoPago.addEventListener("change", () => {
-
-    if(tipoPago.value === "transferencia"){
-
-      camposTransferencia.style.display = "block";
-
-    } else {
-
-      camposTransferencia.style.display = "none";
-
-    }
-
-  });
-
-
-  // Actualizar control de reclamaciones
-
-  estadoReclamacion.addEventListener("change", () => {
-
-    if(estadoReclamacion.value === "pendiente"){
-
-      resultadoReclamacion.textContent = "El premio se encuentra pendiente.";
-
-    } else if(estadoReclamacion.value === "reclamado"){
-
-      resultadoReclamacion.textContent = "El premio ha sido reclamado.";
-
-    } else if(estadoReclamacion.value === "pagado"){
-
-      resultadoReclamacion.textContent = "El premio ha sido pagado.";
-
-    } else {
-
-      resultadoReclamacion.textContent = "";
-
-    }
-
-  });
-
-
-  // Registrar pago y generar comprobante
-
-  btnPagar.addEventListener("click", () => {
-
-    comprobante.innerHTML = `
-      <h3>Comprobante de Pago</h3>
-      <p>Boleto: ${document.getElementById("numero-boleto").value}</p>
-      <p>Monto: ${montoPremio.value} RD$</p>
-      <p>Tipo de pago: ${tipoPago.value}</p>
-      <p>Estado: Pagado</p>
-    `;
-
-    estadoReclamacion.value = "pagado";
-    resultadoReclamacion.textContent = "El premio ha sido pagado.";
-
-  });
-
-</script>
-
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-        <script src="Script.js"></script>
+    <script src="Script.js"></script>
 </body>
 </html>
+

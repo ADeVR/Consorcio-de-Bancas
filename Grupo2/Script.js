@@ -13,15 +13,7 @@ class BotonPagar {
     }
  
 }
-/*
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll(".columna-accion").forEach(function (celda) {
-    const fila = celda.closest("tr");
-    const numeroBoleto = fila.querySelector(".numero-boleto").textContent.trim();
 
-    celda.innerHTML = BotonPagar.crear(numeroBoleto);
-  });
-});*/
 
 //VARIABLES GLOBALES
 
@@ -133,62 +125,54 @@ function cargarGanadores() {
  
 }
  
-//MOSTRAR TABLA
+//MOSTRAR BOLETOS
 
- 
-function mostrarBoletos(lista) {
- 
+ function mostrarBoletos(lista) {
+
     $("#lista-boletos").empty();
- 
+
     $.each(lista, function (i, boleto) {
- 
-        let boton;
- 
-        if (boleto.estado === "Pagado") {
- 
-            boton = `
-                <button
-                    type="button"
-                    class="btn btn-secondary btn-sm"
-                    disabled>
-                    Pagado
-                </button>
-            `;
- 
-        }
-        else {
- 
-            boton = BotonPagar.crear(boleto.numero);
- 
-        }
- 
+
+        let pagado = boleto.estado === "Pagado";
+
+        let boton = pagado
+          ? `<button type="button" class="btn btn-pagado btn-sm" disabled>Pagado</button>`
+         : BotonPagar.crear(boleto.numero);
+
         $("#lista-boletos").append(`
- 
+
             <tr>
- 
+
                 <td>${boleto.numero}</td>
- 
+
                 <td>${boleto.modalidad}</td>
- 
+
                 <td>${boleto.jugada}</td>
- 
+
                 <td>${boleto.sorteo}</td>
- 
+                
                 <td>${boleto.estado}</td>
- 
-                <td>RD$ ${boleto.premio.toLocaleString("es-DO")}</td>
- 
-                <td class="columna-accion">
-                    ${boton}
+                <td>${boleto.premio.toLocaleString("es-DO")}</td>
+                <td>
+                    <select class="form-select form-select-sm metodo-pago"
+                            aria-label="Método de pago" ${pagado ? "disabled" : ""}>
+                        <option value="efectivo" selected>Efectivo</option>
+                        <option value="transferencia">Transferencia</option>
+                    </select>
+                    <input type="text"
+                           class="form-control form-control-sm cuenta-cliente"
+                           placeholder="Cuenta del cliente"
+                           style="display:none;">
                 </td>
- 
+                <td class="columna-accion">${boton}</td>
             </tr>
- 
+
         `);
- 
+
     });
- 
+
 }
+ 
  
 // =============================================
 // CALCULAR PREMIO
@@ -208,88 +192,116 @@ function calcularPago(monto) {
 // =============================================
  
 $(document).on("click", ".btn-pagar", function () {
- 
+
     let numero = $(this).data("numero");
- 
+    let metodo = $(this).closest("tr").find(".metodo-pago").val();
+    let cuenta = $(this).closest("tr").find(".cuenta-cliente").val().trim();
+
     let boleto = boletos.find(function (b) {
- 
+
         return String(b.numero) === String(numero);
- 
+
     });
- 
+
     if (!boleto) {
- 
+
         return;
- 
+
     }
- 
+
     // Evitar doble pago
- 
+
     if (boleto.estado === "Pagado") {
- 
+
         alert("Este boleto ya fue pagado.");
- 
         return;
- 
     }
- 
-    let montoFinal =
-        calcularPago(boleto.premio);
- 
+
+    // Validar cuenta si es transferencia
+    if (metodo === "transferencia" && cuenta === "") {
+        alert("Debes escribir la cuenta del cliente para pagar por transferencia.");
+        return;
+
+    }
+
+    let montoFinal = calcularPago(boleto.premio);
+
     boleto.estado = "Pagado";
- 
-    $("#estado-reclamacion")
-        .val("pagado");
- 
-    $("#resultado-reclamacion")
-        .text("El premio ha sido pagado.");
- 
+
+    $("#estado-reclamacion").val("pagado");
+    $("#resultado-reclamacion").text("El premio ha sido pagado.");
+
     $("#comprobante").html(`
- 
+
         <h3>Comprobante de Pago</h3>
- 
+
         <p>
             <strong>Boleto:</strong>
             ${boleto.numero}
         </p>
- 
+
         <p>
             <strong>Modalidad:</strong>
             ${boleto.modalidad}
         </p>
- 
+
         <p>
             <strong>Jugada:</strong>
             ${boleto.jugada}
         </p>
- 
+
         <p>
             <strong>Sorteo:</strong>
             ${boleto.sorteo}
         </p>
- 
+
         <p>
             <strong>Premio:</strong>
             RD$ ${boleto.premio.toLocaleString("es-DO")}
         </p>
- 
+
         <p>
             <strong>Retención:</strong>
             ${porcentajeRetencion}%
         </p>
- 
+
         <p>
             <strong>Monto Pagado:</strong>
             RD$ ${montoFinal.toLocaleString("es-DO")}
         </p>
- 
+
+        <p>
+            <strong>Método de pago:</strong>
+            ${metodo === "transferencia" ? "Transferencia" : "Efectivo"}
+        </p>
+
+        ${metodo === "transferencia" ? `
+        <p>
+            <strong>Cuenta del cliente:</strong>
+            ${cuenta}
+        </p>` : ""}
+
         <p>
             <strong>Estado:</strong>
             Pagado
         </p>
- 
+
     `);
- 
+    // Mostrar el campo de cuenta solo si elige transferencia
+
     mostrarBoletos(boletos);
- 
+
+
+}
+);
+$(document).on("change", ".metodo-pago", function () {
+
+    let campo = $(this).closest("td").find(".cuenta-cliente");
+
+    if ($(this).val() === "transferencia") {
+        campo.show().focus();
+    } else {
+        campo.hide().val("");
+    }
+
 });
