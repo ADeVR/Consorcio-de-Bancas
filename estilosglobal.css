@@ -1,0 +1,379 @@
+/* ==========================================================
+   estilosglobal.css — Estilo común del Sistema de Consorcio de Banca
+   Base: el diseño del módulo de Pagos (verde, boleto con perforaciones).
+
+   Orden de carga en cada módulo:
+     1. Bootstrap 5.3
+     2. estilosglobal.css   
+     3. estilos.css        (solo ajustes propios del módulo)
+
+   Las variables marcadas "derivado" no estaban en el estilo de Pagos
+   y se agregaron para que otros módulos tengan lo que necesitan.
+   ========================================================== */
+
+:root {
+  /* ---- Marco superior ---- */
+  --color-marco-fondo: #05422d;
+
+  /* ---- Textos ---- */
+  --color-verde-texto: #0b3527;
+  --color-texto-principal: #1E2A24;
+  --color-texto-suave: #4f6358;          /* derivado */
+
+  /* ---- Fondos ---- */
+  --color-fondo-pagina: #F4F7F5;
+  --color-fondo-tarjeta: #fdfdfd;
+
+  /* ---- Acentos ---- */
+  --color-acento-borde: #31d171;
+  --color-foco-input: #83e45c;
+  --color-foco-borde: #1f8f4e;           /* derivado */
+  --color-foco-visible: #1a6fd1;         /* derivado */
+  --color-borde: #d5e2db;                /* derivado */
+  --color-blanco: #ffffff;               /* derivado */
+  --color-hover-suave: #e6f2ea;          /* derivado */
+  --color-foco-glow: rgba(131, 228, 92, 0.45);  /* derivado */
+
+  /* ---- Botón principal ---- */
+  --color-pagar-fondo: #066f2e;
+  --color-pagar-hover: #59f75e;
+  --color-pagar-sombra: #0e0b07;
+  --color-pagar-sombra2: #35a1ff;
+
+  /* ---- Estados de un registro (derivados) ---- */
+  --estado-pendiente-fondo: #fde8c4;
+  --estado-pendiente-texto: #8a5a00;
+  --estado-exito-fondo: #d4f3e0;
+  --estado-exito-texto: #0b3527;
+  --estado-anulado-fondo: #e4e8e6;
+  --estado-anulado-texto: #3d4a43;
+
+  /* ---- Mensajes (derivados) ---- */
+  --info-fondo: #e3effa;   --info-borde: #4a78c2;   --info-texto: #1d3f6e;
+  --aviso-fondo: #fff4d6;  --aviso-borde: #d99a00;  --aviso-texto: #6b4700;
+  --error-fondo: #fbe3e1;  --error-borde: #c9372c;  --error-texto: #8e1b13;
+  --peligro-fondo: #b3261e;
+  --peligro-hover: #8e1b13;
+
+  /* ---- Tipografía y medidas ---- */
+  --fuente-base: "Segoe UI", Arial, sans-serif;
+  --logo-alto: 240px;
+}
+
+body {
+  margin: 0;
+  background: var(--color-fondo-pagina);
+  color: var(--color-texto-principal);
+  font-family: var(--fuente-base);
+}
+
+/* ---- Marco superior con el logo del módulo ---- */
+.masthead,
+.marco-superior {
+  background: var(--color-marco-fondo);
+  color: var(--color-blanco);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.masthead .logo {
+  height: var(--logo-alto);
+  border-radius: 50%;
+}
+
+/* ---- Título principal de la pantalla ---- */
+.ticket-title,
+.titulo-pantalla {
+  font-family: "Segoe UI", Georgia, serif;
+  font-weight: 700;
+  color: var(--color-marco-fondo);
+  margin: 28px 0 8px;
+  font-size: clamp(2rem, 6vw, 50px);
+  text-align: center;
+}
+
+/* ---- El boleto: contenedor de la pantalla ---- */
+.ticket {
+  position: relative;
+  background: var(--color-fondo-tarjeta);
+  max-width: 1000px;
+  margin: 0 auto 48px;
+  box-shadow: 0 2px 14px var(--color-acento-borde);
+  border-radius: 6px;
+  overflow: visible;
+  text-align: left;
+}
+
+.ticket section {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Línea de perforación entre secciones, con sus dos muescas */
+.ticket section:not(:first-of-type) {
+  border-top: 2px dashed var(--color-acento-borde);
+}
+
+.ticket section:not(:first-of-type)::before,
+.ticket section:not(:first-of-type)::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  width: 20px;
+  height: 20px;
+  background: var(--color-fondo-pagina);
+  border-radius: 50%;
+}
+
+.ticket section:not(:first-of-type)::before { left: -10px; }
+.ticket section:not(:first-of-type)::after  { right: -10px; }
+
+/* ---- Títulos de sección ---- */
+h2 {
+  font-family: "Segoe UI", Georgia, serif;
+  font-size: clamp(1.4rem, 4vw, 30px);
+  color: var(--color-verde-texto);
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-weight: 650;
+}
+
+h3 {
+  color: var(--color-verde-texto);
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+/* ---- Formularios ---- */
+.form-group {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 20px;
+  color: var(--color-texto-principal);
+  font-weight: 600;
+}
+
+.form-control,
+.form-select,
+.cuenta-cliente {
+  background-color: var(--color-fondo-tarjeta);
+  border: 1px solid var(--color-texto-principal);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 17px;
+}
+
+.form-select {
+  width: auto;
+  min-width: 150px;
+}
+
+.cuenta-cliente {
+  width: 150px;
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+.form-control:focus,
+.form-select:focus,
+.cuenta-cliente:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-foco-borde);
+  box-shadow: 0 0 0 3px var(--color-foco-glow);
+}
+
+/* ---- Botones ---- */
+.btn-pagar,
+.btn-principal,
+.btn-pagado,
+.btn-secundario,
+.btn-peligro {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin: 0;
+  padding: 0 1rem;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Principal: la acción más importante de la pantalla (en Pagos) */
+.btn-pagar,
+.btn-principal,
+.btn-pagado {
+  background: var(--color-pagar-fondo);
+  border: 1px solid var(--color-pagar-sombra);
+  color: var(--color-fondo-pagina);
+}
+
+.btn-pagar:hover:not(:disabled),
+.btn-principal:hover:not(:disabled) {
+  background: var(--color-pagar-hover);
+  border-color: var(--color-pagar-sombra2);
+  color: var(--color-verde-texto);
+}
+
+.btn-pagar:disabled,
+.btn-principal:disabled {
+  background: var(--color-pagar-fondo);
+  border-color: var(--color-pagar-sombra);
+  color: var(--color-fondo-pagina);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-pagado:disabled {
+  background: var(--color-pagar-fondo);
+  border-color: var(--color-pagar-sombra);
+  color: var(--color-fondo-pagina);
+  opacity: 1 !important;
+  cursor: default;
+}
+
+code {
+  color: var(--color-verde-texto);
+}
+
+/* Secundario: cancelar, volver, limpiar */
+.btn-secundario {
+  background: transparent;
+  border: 1px solid var(--color-verde-texto);
+  color: var(--color-verde-texto);
+}
+
+.btn-secundario:hover:not(:disabled) {
+  background: var(--color-hover-suave);
+}
+
+/* Peligro: anular, eliminar */
+.btn-peligro {
+  background: var(--peligro-fondo);
+  border: 1px solid var(--peligro-fondo);
+  color: var(--color-blanco);
+}
+
+.btn-peligro:hover:not(:disabled) {
+  background: var(--peligro-hover);
+}
+
+.btn-secundario:disabled,
+.btn-peligro:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- Tablas ---- */
+.table,
+.tabla-datos {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-variant-numeric: tabular-nums;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-border-color: var(--color-borde);
+  --bs-table-hover-bg: var(--color-hover-suave);
+}
+
+.tabla-datos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th,
+.tabla-datos th {
+  text-align: left;
+  color: var(--color-verde-texto);
+  border-bottom: 2px solid var(--color-acento-borde);
+}
+
+.table th, .table td,
+.tabla-datos th, .tabla-datos td {
+  padding: 0.6rem 0.5rem;
+  vertical-align: middle;
+}
+
+.tabla-datos td { border-bottom: 1px solid var(--color-borde); }
+
+.table .num { text-align: right; }
+.columna-accion { white-space: nowrap; text-align: right; }
+
+/* ---- Estados de un registro ---- */
+.estado,
+.etiqueta {
+  display: inline-block;
+  padding: 0.1rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.estado-pendiente, .etiqueta-pendiente { background: var(--estado-pendiente-fondo); color: var(--estado-pendiente-texto); }
+.estado-pagado, .estado-exito, .etiqueta-exito { background: var(--estado-exito-fondo); color: var(--estado-exito-texto); }
+.estado-anulado { background: var(--estado-anulado-fondo); color: var(--estado-anulado-texto); }
+
+/* ---- Mensajes: la franja izquierda indica la gravedad ---- */
+.mensaje {
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 0.5rem;
+  border-left: 4px solid;
+  border-radius: 0 4px 4px 0;
+  font-size: 1rem;
+}
+
+.mensaje-info        { background: var(--info-fondo);  border-color: var(--info-borde);  color: var(--info-texto); }
+.mensaje-advertencia { background: var(--aviso-fondo); border-color: var(--aviso-borde); color: var(--aviso-texto); }
+.mensaje-error       { background: var(--error-fondo); border-color: var(--error-borde); color: var(--error-texto); }
+.mensaje-exito       { background: var(--estado-exito-fondo); border-color: var(--color-acento-borde); color: var(--estado-exito-texto); }
+
+/* Resultado corto debajo de un campo o botón */
+.resultado {
+  color: var(--color-verde-texto);
+}
+
+/* ---- Comprobante ---- */
+.comprobante-box {
+  min-height: 90px;
+  border: 1px dashed var(--color-acento-borde);
+  border-radius: 4px;
+  padding: 16px;
+  color: var(--color-verde-texto);
+  font-size: 20px;
+}
+
+.comprobante-box:empty::before {
+  content: "Aún no se ha generado ningún comprobante.";
+  color: var(--color-texto-suave);
+}
+
+/* ---- Accesibilidad ---- */
+:focus-visible {
+  outline: 3px solid var(--color-foco-visible);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---- Pantallas pequeñas ---- */
+@media (max-width: 576px) {
+  :root { --logo-alto: 140px; }
+  .form-group { grid-template-columns: 1fr; font-size: 17px; }
+  .table, .tabla-datos { font-size: 16px; }
+  .btn-pagar, .btn-principal, .btn-pagado, .btn-secundario, .btn-peligro { font-size: 17px; }
+}
