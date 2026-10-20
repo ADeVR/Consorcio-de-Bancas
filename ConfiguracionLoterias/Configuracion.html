@@ -8,145 +8,373 @@
 
     <title>Configuración de Loterías</title>
 
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Estilos propios del proyecto -->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<body>
+<body class="bg-light">
 
-    <h1>Configuración de Loterías</h1>
-
-    <h2>Registrar lotería</h2>
-
-    <input type="text" id="nombreLoteria"
-        placeholder="Nombre de la lotería">
-
-    <!--Anteriorior sin Jquery    
-    <!-- <button onclick="agregarLoteria()">Guardar lotería</button> -->
-    
-    <!--Actual con Jquery   -->
-    <button id="btnAgregarLoteria" type="button">
-        Guardar lotería
-    </button>
-
-    <h2>Loterías registradas</h2>
-
-    <ul id="listaLoterias"></ul>
-
-    <hr>
-
-    <h2>Registrar sorteo</h2>
-
-    <label>Lotería:</label>
-    <select id="loteriaSorteo"></select>
-
-    <label>Nombre del sorteo:</label>
-    <input type="text" id="nombreSorteo"
-        placeholder="Ej. Sorteo de la tarde">
-
-    <label>Hora:</label>
-    <input type="time" id="horaSorteo">
-
-    <p>Días del sorteo:</p>
-
-    <div class="dias">
-        <label><input type="checkbox" value="Lunes"> Lunes</label>
-        <label><input type="checkbox" value="Martes"> Martes</label>
-        <label><input type="checkbox" value="Miércoles"> Miércoles</label>
-        <label><input type="checkbox" value="Jueves"> Jueves</label>
-        <label><input type="checkbox" value="Viernes"> Viernes</label>
-        <label><input type="checkbox" value="Sábado"> Sábado</label>
-        <label><input type="checkbox" value="Domingo"> Domingo</label>
-    </div>
-
-    <button onclick="agregarSorteo()">Guardar sorteo</button>
-
-    <h2>Sorteos registrados</h2>
-
-    <ul id="listaSorteos"></ul>
-
-    <hr>
-
-    <h2>Configurar modalidad y premios</h2>
-
-    <label>Sorteo:</label>
-    <select id="sorteoJuego"></select>
-
-    <label>Modalidad:</label>
-    <select id="modalidad">
-        <option value="Quiniela">Quiniela</option>
-        <option value="Palé">Palé</option>
-        <option value="Tripleta">Tripleta</option>
-        <option value="Primera">Primera</option>
-        <option value="Segunda">Segunda</option>
-        <option value="Tercera">Tercera</option>
-        <option value="Pega 3">Pega 3</option>
-        <option value="Otra">Otra</option>
-    </select>
-
-    <label>Cantidad de números:</label>
-    <input type="number" id="cantidadNumeros" min="1" value="1">
-
-    <div class="fila">
-        <div>
-            <label>Número mínimo:</label>
-            <input type="text" id="numeroMinimo" value="00">
+    <!-- Encabezado -->
+    <header class="bg-primary text-white py-4 mb-4 shadow-sm">
+        <div class="container">
+            <h1 class="h2 mb-1">Configuración de Loterías</h1>
+            <p class="mb-0">
+                Administración de loterías, sorteos, modalidades y premios
+            </p>
         </div>
+    </header>
 
-        <div>
-            <label>Número máximo:</label>
-            <input type="text" id="numeroMaximo" value="99">
-        </div>
-    </div>
+    <main class="container pb-5">
 
-    <label>Monto mínimo de apuesta (RD$):</label>
-    <input type="number" id="montoMinimo" min="0" step="0.01" value="1">
+        <!-- SECCIÓN 1: LOTERÍAS -->
+        <section class="card shadow-sm mb-4">
 
-    <label>Monto máximo de apuesta (RD$):</label>
-    <input type="number" id="montoMaximo" min="0" step="0.01" value="1000">
+            <div class="card-header bg-white py-3">
+                <h2 class="h5 mb-0">1. Registrar lotería</h2>
+            </div>
 
-    <h3>Premio por cada RD$1 apostado</h3>
+            <div class="card-body">
 
-    <p>Escribe el pago correspondiente a cada posición o modalidad.
-        Deja en blanco los que no apliquen.</p>
+                <div class="row g-3 align-items-end">
 
-    <div class="fila">
-        <div>
-            <label>Primera (RD$):</label>
-            <input type="number" id="premioPrimera" min="0" step="0.01">
-        </div>
+                    <div class="col-md-8">
+                        <label for="nombreLoteria" class="form-label">
+                            Nombre de la lotería
+                        </label>
 
-        <div>
-            <label>Segunda (RD$):</label>
-            <input type="number" id="premioSegunda" min="0" step="0.01">
-        </div>
+                        <input
+                            type="text"
+                            id="nombreLoteria"
+                            class="form-control"
+                            placeholder="Ej.: Lotería Nacional">
+                    </div>
 
-        <div>
-            <label>Tercera (RD$):</label>
-            <input type="number" id="premioTercera" min="0" step="0.01">
-        </div>
+                    <div class="col-md-4">
+                        <button
+                            id="btnAgregarLoteria"
+                            type="button"
+                            class="btn btn-primary w-100">
+                            Guardar lotería
+                        </button>
+                    </div>
 
-        <div>
-            <label>Palé (RD$):</label>
-            <input type="number" id="premioPale" min="0" step="0.01">
-        </div>
+                </div>
 
-        <div>
-            <label>Tripleta (RD$):</label>
-            <input type="number" id="premioTripleta" min="0" step="0.01">
-        </div>
-    </div>
+                <hr>
 
-    <button onclick="agregarJuego()">Guardar modalidad</button>
+                <h3 class="h6">Loterías registradas</h3>
+                <ul id="listaLoterias" class="list-group"></ul>
 
-    <h2>Modalidades configuradas</h2>
+            </div>
+        </section>
 
-    <ul id="listaJuegos"></ul>
+        <!-- SECCIÓN 2: SORTEOS -->
+        <section class="card shadow-sm mb-4">
 
-<!-- Biblioteca jQuery desde internet-->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+            <div class="card-header bg-white py-3">
+                <h2 class="h5 mb-0">2. Registrar sorteo</h2>
+            </div>
 
-<!-- Nuestro código JavaScript -->
-<script src="js/script.js"></script>
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label for="loteriaSorteo" class="form-label">
+                            Lotería
+                        </label>
+
+                        <select
+                            id="loteriaSorteo"
+                            class="form-select">
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="nombreSorteo" class="form-label">
+                            Nombre del sorteo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombreSorteo"
+                            class="form-control"
+                            placeholder="Ej.: Sorteo de la tarde">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="horaSorteo" class="form-label">
+                            Hora del sorteo
+                        </label>
+
+                        <input
+                            type="time"
+                            id="horaSorteo"
+                            class="form-control">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label d-block">
+                            Días del sorteo
+                        </label>
+
+                        <div class="dias d-flex flex-wrap gap-3">
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Lunes">
+                                <span class="form-check-label">Lunes</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Martes">
+                                <span class="form-check-label">Martes</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Miércoles">
+                                <span class="form-check-label">Miércoles</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Jueves">
+                                <span class="form-check-label">Jueves</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Viernes">
+                                <span class="form-check-label">Viernes</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Sábado">
+                                <span class="form-check-label">Sábado</span>
+                            </label>
+
+                            <label class="form-check">
+                                <input class="form-check-input"
+                                    type="checkbox" value="Domingo">
+                                <span class="form-check-label">Domingo</span>
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button
+                            type="button"
+                            class="btn btn-success"
+                            onclick="agregarSorteo()">
+                            Guardar sorteo
+                        </button>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <h3 class="h6">Sorteos registrados</h3>
+                <ul id="listaSorteos" class="list-group"></ul>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: MODALIDADES Y PREMIOS -->
+        <section class="card shadow-sm mb-4">
+
+            <div class="card-header bg-white py-3">
+                <h2 class="h5 mb-0">3. Configurar modalidad y premios</h2>
+            </div>
+
+            <div class="card-body">
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label for="sorteoJuego" class="form-label">
+                            Sorteo
+                        </label>
+
+                        <select
+                            id="sorteoJuego"
+                            class="form-select">
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="modalidad" class="form-label">
+                            Modalidad
+                        </label>
+
+                        <select id="modalidad" class="form-select">
+                            <option value="Quiniela">Quiniela</option>
+                            <option value="Palé">Palé</option>
+                            <option value="Tripleta">Tripleta</option>
+                            <option value="Primera">Primera</option>
+                            <option value="Segunda">Segunda</option>
+                            <option value="Tercera">Tercera</option>
+                            <option value="Pega 3">Pega 3</option>
+                            <option value="Otra">Otra</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="cantidadNumeros" class="form-label">
+                            Cantidad de números
+                        </label>
+
+                        <input
+                            type="number"
+                            id="cantidadNumeros"
+                            class="form-control"
+                            min="1"
+                            value="1">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="numeroMinimo" class="form-label">
+                            Número mínimo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="numeroMinimo"
+                            class="form-control"
+                            value="00">
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="numeroMaximo" class="form-label">
+                            Número máximo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="numeroMaximo"
+                            class="form-control"
+                            value="99">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="montoMinimo" class="form-label">
+                            Apuesta mínima (RD$)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="montoMinimo"
+                            class="form-control"
+                            min="0"
+                            step="0.01"
+                            value="1">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="montoMaximo" class="form-label">
+                            Apuesta máxima (RD$)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="montoMaximo"
+                            class="form-control"
+                            min="0"
+                            step="0.01"
+                            value="1000">
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <h3 class="h6">Premios por cada RD$1 apostado</h3>
+
+                <p class="text-secondary small">
+                    Introduce el pago correspondiente a cada posición.
+                    Deja en blanco los premios que no apliquen.
+                </p>
+
+                <div class="row g-3">
+
+                    <div class="col-sm-6 col-lg">
+                        <label for="premioPrimera" class="form-label">
+                            Primera (RD$)
+                        </label>
+                        <input type="number" id="premioPrimera"
+                            class="form-control" min="0" step="0.01">
+                    </div>
+
+                    <div class="col-sm-6 col-lg">
+                        <label for="premioSegunda" class="form-label">
+                            Segunda (RD$)
+                        </label>
+                        <input type="number" id="premioSegunda"
+                            class="form-control" min="0" step="0.01">
+                    </div>
+
+                    <div class="col-sm-6 col-lg">
+                        <label for="premioTercera" class="form-label">
+                            Tercera (RD$)
+                        </label>
+                        <input type="number" id="premioTercera"
+                            class="form-control" min="0" step="0.01">
+                    </div>
+
+                    <div class="col-sm-6 col-lg">
+                        <label for="premioPale" class="form-label">
+                            Palé (RD$)
+                        </label>
+                        <input type="number" id="premioPale"
+                            class="form-control" min="0" step="0.01">
+                    </div>
+
+                    <div class="col-sm-6 col-lg">
+                        <label for="premioTripleta" class="form-label">
+                            Tripleta (RD$)
+                        </label>
+                        <input type="number" id="premioTripleta"
+                            class="form-control" min="0" step="0.01">
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="agregarJuego()">
+                        Guardar modalidad
+                    </button>
+                </div>
+
+                <hr class="my-4">
+
+                <h3 class="h6">Modalidades configuradas</h3>
+                <ul id="listaJuegos" class="list-group"></ul>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- JavaScript de nuestro proyecto -->
+    <script src="js/script.js"></script>
 
 </body>
 </html>
