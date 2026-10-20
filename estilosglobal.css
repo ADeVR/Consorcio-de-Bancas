@@ -4,7 +4,7 @@
 
    Orden de carga en cada módulo:
      1. Bootstrap 5.3
-     2. estilosglobal.css   
+     2. estilosglobal.css  (<link rel="stylesheet" href="../estilosglobal.css">)
      3. estilos.css        (solo ajustes propios del módulo)
 
    Las variables marcadas "derivado" no estaban en el estilo de Pagos
