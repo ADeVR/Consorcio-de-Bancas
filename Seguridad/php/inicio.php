@@ -11,7 +11,7 @@ $t = tokenCsrf();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Inicio | Consorcio de Bancas</title>
-    <link rel="stylesheet" href="/Seguridad/css/seguridad.css">
+    <link rel="stylesheet" href="/ConsorcioDeBancas/Seguridad/css/seguridad.css">
 </head>
 
 <body>
@@ -22,7 +22,7 @@ $t = tokenCsrf();
                 <h1>Menú principal</h1>
                 <p>Bienvenido, <?= escapar($_SESSION["usuario"]) ?>.</p>
             </div>
-            <form action="/Seguridad/php/cerrar_sesion.php" method="post"><input type="hidden" name="token_csrf" value="<?= escapar($t) ?>"><button class="boton boton-secundario">Cerrar sesión</button></form>
+            <form action="/ConsorcioDeBancas/Seguridad/php/cerrar_sesion.php" method="post"><input type="hidden" name="token_csrf" value="<?= escapar($t) ?>"><button class="boton boton-secundario">Cerrar sesión</button></form>
         </header>
         <section class="tarjeta">
             <h2>Sesión iniciada correctamente</h2>
