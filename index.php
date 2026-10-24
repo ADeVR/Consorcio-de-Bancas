@@ -1,30 +1,27 @@
+
 <?php
 session_start();
 
 $rutaSeguridad = "/ConsorcioDeBancas/Seguridad/php";
 
-// Si no ha iniciado sesión, enviarlo al login.
+// Si no ha iniciado sesión, ir al login.
 if (empty($_SESSION["usuario_id"])) {
     header("Location: " . $rutaSeguridad . "/login.php");
     exit;
 }
 
-// Comprobar el rol del usuario.
+// Comprobar que el rol sea válido.
 $rol = $_SESSION["rol"] ?? "";
 
-if ($rol === "admin") {
-    header("Location: " . $rutaSeguridad . "/usuarios.php");
+if (!in_array($rol, ["admin", "agente"], true)) {
+    $_SESSION = [];
+    session_destroy();
+
+    header("Location: " . $rutaSeguridad . "/login.php");
     exit;
 }
 
-if ($rol === "agente") {
-    header("Location: " . $rutaSeguridad . "/inicio.php");
-    exit;
-}
-
-// Si el rol no es válido, cerrar la sesión.
-$_SESSION = [];
-session_destroy();
-
-header("Location: " . $rutaSeguridad . "/login.php");
+// Ambos roles entran al panel principal.
+// El panel decidirá qué opciones mostrar.
+header("Location: " . $rutaSeguridad . "/inicio.php");
 exit;
