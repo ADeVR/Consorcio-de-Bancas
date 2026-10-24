@@ -1,12 +1,12 @@
-# Base de datos — Consorcio de Bancas
+ Base de datos — Consorcio de Bancas
 
-## 1. Propósito
+Propósito
 
 Esta carpeta contendra los scripts SQL y la documentación relacionados con la estructura de la base de datos del sistema Consorcio de Bancas.
 
 El proyecto utiliza una base de datos MySQL compartida mediante acceso remoto. 
 
-## 2. Organización
+2. Organización
 
 - `esquema.sql`: estructura de las tablas principales del sistema.
 - `permisos.sql`: creación de la tabla que almacena los permisos individuales de cada usuario.
@@ -14,7 +14,7 @@ El proyecto utiliza una base de datos MySQL compartida mediante acceso remoto.
 
 Los nombres anteriores representan la organización recomendada. Deben coincidir con los archivos SQL que realmente existan en el repositorio.
 
-## 3. Tabla de usuarios
+ 3. Tabla de usuarios
 
 La tabla `usuarios` almacena la información necesaria para la autenticación, incluyendo:
 
@@ -27,7 +27,7 @@ La tabla `usuarios` almacena la información necesaria para la autenticación, i
 
 Las contraseñas no deben guardarse en texto plano.
 
-## 4. Tabla de permisos
+ 4. Tabla de permisos
 
 La tabla `usuario_permisos` relaciona cada usuario con los módulos a los que tiene acceso.
 
@@ -43,7 +43,7 @@ Cada permiso se identifica mediante el usuario y el nombre del módulo. La combi
 
 Los administradores tienen acceso a todos los módulos según las reglas de autorización de la aplicación. Los agentes solo deben acceder a los módulos que tengan autorizados.
 
-## 5. Base de datos compartida
+ 5. Base de datos compartida
 
 La base de datos utilizada actualmente se llama `u318940728_aderson`.
 
@@ -51,7 +51,7 @@ La conexión se configura en el entorno local o en el servidor, mediante variabl
 
 Los scripts SQL deben utilizarse para crear o actualizar la estructura cuando sea necesario. No se deben importar nuevamente sobre la base de datos compartida sin revisar primero sus efectos.
 
-## 6. Seguridad
+ 6. Seguridad
 
 - No subir contraseñas de MySQL al repositorio.
 - No subir exportaciones con datos personales o credenciales.
@@ -59,6 +59,6 @@ Los scripts SQL deben utilizarse para crear o actualizar la estructura cuando se
 - Aplicar los cambios estructurales mediante scripts SQL revisados.
 - Mantener la estructura documentada sincronizada con la base de datos real.
 
-## 7. Responsabilidad del equipo
+ 7. Responsabilidad del equipo
 
 Cada integrante debe respetar las tablas existentes y coordinar cualquier cambio que afecte a otros módulos. Las modificaciones estructurales deben compartirse por Git para que todos conozcan los cambios realizados.
