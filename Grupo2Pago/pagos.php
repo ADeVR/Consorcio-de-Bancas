@@ -1,3 +1,9 @@
+<?php
+require_once _DIR_ . "/../Seguridad/php/conexion.php";
+require_once _DIR_ . "/../Seguridad/php/funciones.php";
+
+exigirPermisoModulo("Pagos");
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
