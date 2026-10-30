@@ -19,7 +19,6 @@ class BotonPagar {
 
 
 let boletos = [];
-let porcentajeRetencion = 10;
  
 
 // INICIO
@@ -175,19 +174,6 @@ function cargarGanadores() {
  
  
 // =============================================
-// CALCULAR PREMIO
-// =============================================
- 
-function calcularPago(monto) {
- 
-    let descuento =
-        monto * (porcentajeRetencion / 100);
- 
-    return monto - descuento;
- 
-}
- 
-// =============================================
 // PAGAR PREMIO
 // =============================================
  
@@ -224,8 +210,6 @@ $(document).on("click", ".btn-pagar", function () {
 
     }
 
-    let montoFinal = calcularPago(boleto.premio);
-
     boleto.estado = "Pagado";
 
     $("#estado-reclamacion").val("pagado");
@@ -261,14 +245,9 @@ $(document).on("click", ".btn-pagar", function () {
         </p>
 
         <p>
-            <strong>Retención:</strong>
-            ${porcentajeRetencion}%
-        </p>
-
-        <p>
-            <strong>Monto Pagado:</strong>
-            RD$ ${montoFinal.toLocaleString("es-DO")}
-        </p>
+            <strong>Monto pagado:</strong>
+            RD$ ${boleto.premio.toLocaleString("es-DO")}
+       </p>
 
         <p>
             <strong>Método de pago:</strong>
