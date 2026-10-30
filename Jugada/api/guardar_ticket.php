@@ -98,7 +98,7 @@ try {
         $pdo->prepare(
         "INSERT INTO ticket (codigo_ticket, id_apertura, id_usuario, fecha_hora, total)
          VALUES (?, NULL, ?, ?, ?)"
-    )->execute([uniqid('TMP'), $_SESSION['usuario_id'], date('Y-m-d H:i:s'), $total]);
+    )->execute([uniqid('TMP'), $_SESSION['usuario_id'], date('Y-m-d H:i:s'), $total]);  
 
     $idTicket = (int) $pdo->lastInsertId();
     $codigo   = 'TK' . str_pad($idTicket, 8, '0', STR_PAD_LEFT);
