@@ -6,7 +6,8 @@ require_once __DIR__ . '/../../Seguridad/php/funciones.php';
 // Ruta web a Seguridad, sacada de la URL actual.
 // Sirve con el Alias (/ConsorcioDeBancas), en local sin alias y en el hosting.
 $urlScript     = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
-$pos           = stripos($urlScript, '/Jugada/');
+$carpeta       = basename(dirname(__DIR__));   // nombre real de la carpeta del módulo
+$pos           = stripos($urlScript, '/' . $carpeta . '/');
 $baseWeb       = ($pos !== false) ? substr($urlScript, 0, $pos) : '';
 $rutaSeguridad = $baseWeb . '/Seguridad/php';
 
