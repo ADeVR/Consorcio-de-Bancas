@@ -3,7 +3,8 @@ require_once __DIR__ . "/../Seguridad/php/conexion.php";
 require_once __DIR__ . "/../Seguridad/php/funciones.php";
 
 exigirPermisoModulo("Pagos");
->?
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
