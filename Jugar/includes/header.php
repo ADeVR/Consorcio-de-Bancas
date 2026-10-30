@@ -16,8 +16,10 @@
         <a class="navbar-brand fw-bold text-dark" href="index.php">
             Sistema de Consorcio de Bancas
         </a>
-        <span class="text-dark">
+                <span class="text-dark">
             Módulo 4 - Jugar | <?= htmlspecialchars($_SESSION['usuario']) ?>
+            <a class="btn btn-sm btn-outline-secondary ms-2" href="<?= htmlspecialchars($rutaSeguridad) ?>/inicio.php">Panel</a>
+            <a class="btn btn-sm btn-outline-secondary ms-1" href="<?= htmlspecialchars($rutaSeguridad) ?>/cerrar_sesion.php">Cerrar sesión</a>
         </span>
     </div>
 </nav>
