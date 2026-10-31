@@ -51,7 +51,7 @@ try {
     // 1. Premio total del ticket, calculado en el servidor
     $q = $conexion->prepare("
         SELECT SUM(d.monto * pj.valor_por_peso) AS premio
-        FROM numero_ganador g
+        FROM numero_ganador_prueba g
         JOIN jugada_detalle d ON d.id_detalle = g.id_detalle
         JOIN ticket t         ON t.id_ticket  = d.id_ticket
         JOIN premios_juego pj ON pj.id        = g.id_premio
@@ -77,7 +77,7 @@ try {
     $q = $conexion->prepare("
         UPDATE jugada_detalle d
         JOIN ticket t         ON t.id_ticket  = d.id_ticket
-        JOIN numero_ganador g ON g.id_detalle = d.id_detalle
+        JOIN numero_ganador_prueba g ON g.id_detalle = d.id_detalle
         SET d.estado = 'pagada'
         WHERE t.codigo_ticket = ?
     ");

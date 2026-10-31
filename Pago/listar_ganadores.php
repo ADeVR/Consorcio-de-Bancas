@@ -39,7 +39,7 @@ try {
     echo json_encode($filas);
 
 } catch (PDOException $e) {
-    error_log('listar_ganadores: ' . $e->getMessage());
+    error_log('listar_ganadores_prueba: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(["error" => "No se pudo consultar los boletos ganadores."]);
 }
