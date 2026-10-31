@@ -188,7 +188,12 @@ $(document).on("click", ".btn-pagar", function () {
         url: "registrar_pago.php",
         type: "POST",
         dataType: "json",
-        data: { numero: numero, metodo: metodo, cuenta: cuenta },
+        data: {
+            numero: numero,
+            metodo: metodo,
+            cuenta: cuenta,
+            token_csrf: $('meta[name="csrf"]').attr("content")
+        },
 
         success: function (resp) {
 

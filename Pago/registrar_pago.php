@@ -7,25 +7,26 @@ require_once __DIR__ . "/../Seguridad/php/funciones.php";
 exigirPermisoModulo("Pagos");
 
 header('Content-Type: application/json; charset=utf-8');
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-function responder($ok, $datos = [], $codigo = 200) {
+function responder(bool $ok, array $datos = [], int $codigo = 200): void
+{
     http_response_code($codigo);
     echo json_encode(array_merge(["ok" => $ok], $datos));
     exit;
 }
 
-// ---- Datos que llegan de la pantalla ----
-$numero = trim($_POST['numero'] ?? '');
-$metodo = $_POST['metodo'] ?? '';
-$cuenta = trim($_POST['cuenta'] ?? '');
+// ---- Solo POST y con token CSRF válido ----
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    responder(false, ["mensaje" => "Método no permitido."], 405);
+}
+if (!csrfValido()) {
+    responder(false, ["mensaje" => "Sesión no válida. Recarga la página."], 403);
+}
 
-// SUPUESTO: el login de Seguridad guarda el id del usuario en $_SESSION['usuario_id'].
-// Si usan otro nombre, cámbialo aquí.
+// ---- Datos que llegan de la pantalla ----
+$numero    = trim($_POST['numero'] ?? '');
+$metodo    = $_POST['metodo'] ?? '';
+$cuenta    = trim($_POST['cuenta'] ?? '');
 $usuarioId = (int) ($_SESSION['usuario_id'] ?? 0);
 
 if ($numero === '') {
@@ -41,14 +42,14 @@ if ($metodo === 'efectivo') {
     $cuenta = null;
 }
 if ($usuarioId <= 0) {
-    responder(false, ["mensaje" => "No se pudo identificar al usuario que registra el pago."], 401);
+    responder(false, ["mensaje" => "No se pudo identificar al usuario."], 401);
 }
 
 try {
-    $conn->begin_transaction();
+    $conexion->beginTransaction();
 
     // 1. Premio total del ticket, calculado en el servidor
-    $stmt = $conn->prepare("
+    $q = $conexion->prepare("
         SELECT SUM(d.monto * pj.valor_por_peso) AS premio
         FROM numero_ganador g
         JOIN jugada_detalle d ON d.id_detalle = g.id_detalle
@@ -56,40 +57,33 @@ try {
         JOIN premios_juego pj ON pj.id        = g.id_premio
         WHERE t.codigo_ticket = ? AND t.estado = 'activo'
     ");
-    $stmt->bind_param("s", $numero);
-    $stmt->execute();
-    $premio = $stmt->get_result()->fetch_assoc()['premio'] ?? null;
-    $stmt->close();
+    $q->execute([$numero]);
+    $premio = $q->fetchColumn();
 
-    if ($premio === null) {
-        $conn->rollback();
+    if ($premio === false || $premio === null) {
+        $conexion->rollBack();
         responder(false, ["mensaje" => "Este boleto no es ganador o está anulado."], 404);
     }
 
     // 2. Guardar el pago (numero_boleto es único: no permite pagar dos veces)
-    $stmt = $conn->prepare("
+    $q = $conexion->prepare("
         INSERT INTO pagos
             (numero_boleto, premio, tipo_pago, cuenta_destino, estado, fecha_pago, hora_pago, usuario_id)
         VALUES (?, ?, ?, ?, 'pagado', CURDATE(), CURTIME(), ?)
     ");
-    $stmt->bind_param("sdssi", $numero, $premio, $metodo, $cuenta, $usuarioId);
-    $stmt->execute();
-    $stmt->close();
+    $q->execute([$numero, $premio, $metodo, $cuenta, $usuarioId]);
 
     // 3. Marcar las líneas ganadoras del ticket como pagadas
-    //    (pendiente de acordar con Jugadas que Pagos haga este cambio)
-    $stmt = $conn->prepare("
+    $q = $conexion->prepare("
         UPDATE jugada_detalle d
-        JOIN ticket t          ON t.id_ticket  = d.id_ticket
-        JOIN numero_ganador g  ON g.id_detalle = d.id_detalle
+        JOIN ticket t         ON t.id_ticket  = d.id_ticket
+        JOIN numero_ganador g ON g.id_detalle = d.id_detalle
         SET d.estado = 'pagada'
         WHERE t.codigo_ticket = ?
     ");
-    $stmt->bind_param("s", $numero);
-    $stmt->execute();
-    $stmt->close();
+    $q->execute([$numero]);
 
-    $conn->commit();
+    $conexion->commit();
 
     responder(true, [
         "numero" => $numero,
@@ -98,10 +92,14 @@ try {
         "cuenta" => $cuenta
     ]);
 
-} catch (mysqli_sql_exception $e) {
-    $conn->rollback();
-    if ($e->getCode() === 1062) { // duplicado en numero_boleto
+} catch (PDOException $e) {
+    if ($conexion->inTransaction()) {
+        $conexion->rollBack();
+    }
+    // 1062 = valor duplicado en numero_boleto: ya se pagó
+    if (($e->errorInfo[1] ?? 0) === 1062) {
         responder(false, ["mensaje" => "Este boleto ya fue pagado."], 409);
     }
+    error_log('registrar_pago: ' . $e->getMessage());
     responder(false, ["mensaje" => "Error al registrar el pago."], 500);
 }

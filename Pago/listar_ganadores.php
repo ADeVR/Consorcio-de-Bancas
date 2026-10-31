@@ -8,9 +8,6 @@ exigirPermisoModulo("Pagos");
 
 header('Content-Type: application/json; charset=utf-8');
 
-// SUPUESTO: conexion.php deja la conexión mysqli en la variable $conn.
-// Si en tu proyecto se llama distinto, cambia $conn por ese nombre.
-
 $sql = "
     SELECT
         t.codigo_ticket                                   AS numero,
@@ -31,18 +28,18 @@ $sql = "
     ORDER BY t.fecha_hora DESC
 ";
 
-$res = $conn->query($sql);
+try {
+    $filas = $conexion->query($sql)->fetchAll();
 
-if (!$res) {
+    foreach ($filas as &$fila) {
+        $fila['premio'] = (float) $fila['premio'];
+    }
+    unset($fila);
+
+    echo json_encode($filas);
+
+} catch (PDOException $e) {
+    error_log('listar_ganadores: ' . $e->getMessage());
     http_response_code(500);
     echo json_encode(["error" => "No se pudo consultar los boletos ganadores."]);
-    exit;
 }
-
-$salida = [];
-while ($fila = $res->fetch_assoc()) {
-    $fila['premio'] = (float) $fila['premio'];
-    $salida[] = $fila;
-}
-
-echo json_encode($salida);
