@@ -4,6 +4,8 @@
 require_once __DIR__ . "/../Seguridad/php/conexion.php";
 require_once __DIR__ . "/../Seguridad/php/funciones.php";
 
+date_default_timezone_set('America/Santo_Domingo');
+
 exigirPermisoModulo("Pagos");
 
 header('Content-Type: application/json; charset=utf-8');
@@ -66,12 +68,12 @@ try {
     }
 
     // 2. Guardar el pago (numero_boleto es único: no permite pagar dos veces)
-    $q = $conexion->prepare("
+        $q = $conexion->prepare("
         INSERT INTO pagos
             (numero_boleto, premio, tipo_pago, cuenta_destino, estado, fecha_pago, hora_pago, usuario_id)
-        VALUES (?, ?, ?, ?, 'pagado', CURDATE(), CURTIME(), ?)
+        VALUES (?, ?, ?, ?, 'pagado', ?, ?, ?)
     ");
-    $q->execute([$numero, $premio, $metodo, $cuenta, $usuarioId]);
+    $q->execute([$numero, $premio, $metodo, $cuenta, date('Y-m-d'), date('H:i:s'), $usuarioId]);
 
     // 3. Marcar las líneas ganadoras del ticket como pagadas
     $q = $conexion->prepare("
