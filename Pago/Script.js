@@ -1,156 +1,134 @@
 
 class BotonPagar {
- 
+
     static crear(numero) {
         return `
             <button
                 type="button"
                 class="btn btn-success btn-pagar btn-sm"
-                data-numero="${numero}">
+                data-numero="${esc(numero)}">
                 Pagar
             </button>
         `;
     }
- 
+
 }
 
+// Evita que un dato con símbolos raros rompa la página
+function esc(texto) {
+    return String(texto ?? "").replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+}
 
-//VARIABLES GLOBALES
-
+// VARIABLES GLOBALES
 
 let boletos = [];
- 
 
 // INICIO
 
- 
 $(document).ready(function () {
- 
+
     cargarGanadores();
- 
+
     // Buscar boleto
- 
+
     $("#numero-boleto").on("keyup", function () {
- 
+
         let texto = $(this).val().toLowerCase();
- 
+
         let resultado = boletos.filter(function (boleto) {
- 
+
             return boleto.numero
                 .toLowerCase()
                 .includes(texto);
- 
+
         });
- 
+
         mostrarBoletos(resultado);
- 
+
     });
- 
+
     // Estado reclamación
- 
+
     $("#estado-reclamacion").on("change", function () {
- 
+
         let estado = $(this).val();
- 
+
         if (estado === "pendiente") {
- 
-            $("#resultado-reclamacion")
-                .text("El premio se encuentra pendiente.");
- 
+            $("#resultado-reclamacion").text("El premio se encuentra pendiente.");
         }
         else if (estado === "reclamado") {
- 
-            $("#resultado-reclamacion")
-                .text("El premio ha sido reclamado.");
- 
+            $("#resultado-reclamacion").text("El premio ha sido reclamado.");
         }
         else if (estado === "pagado") {
- 
-            $("#resultado-reclamacion")
-                .text("El premio ha sido pagado.");
- 
+            $("#resultado-reclamacion").text("El premio ha sido pagado.");
         }
         else {
- 
             $("#resultado-reclamacion").text("");
- 
         }
- 
+
     });
- 
+
 });
- 
 
-// CARGAR XML
- 
+// CARGAR BOLETOS GANADORES DESDE LA BASE
+
 function cargarGanadores() {
- 
-    $.ajax({
- 
-        url: "Pago.XML",   
-        type: "GET",
-        dataType: "xml",
- 
-        success: function (xml) {
- 
-            boletos = [];
- 
-            $(xml).find("boleto").each(function () {
- 
-                boletos.push({
- 
-                    numero: $(this).find("numero").text(),
-                    modalidad: $(this).find("modalidad").text(),
-                    jugada: $(this).find("jugada").text(),
-                    sorteo: $(this).find("sorteo").text(),
-                    premio: parseFloat($(this).find("premio").text()),
-                    estado: $(this).find("estado").text()
- 
-                });
- 
-            });
- 
-            mostrarBoletos(boletos);
- 
-        },
- 
-        error: function () {
- 
-            alert("No se pudo cargar Pago.XML");
- 
-        }
- 
-    });
- 
-}
- 
-//MOSTRAR BOLETOS
 
- function mostrarBoletos(lista) {
+    $.ajax({
+
+        url: "listar_ganadores.php",
+        type: "GET",
+        dataType: "json",
+
+        success: function (datos) {
+
+            boletos = datos.map(function (b) {
+                return {
+                    numero: b.numero,
+                    modalidad: b.modalidad,
+                    jugada: b.jugada,
+                    sorteo: b.sorteo,
+                    premio: parseFloat(b.premio),
+                    estado: b.estado            // "pendiente" o "pagado"
+                };
+            });
+
+            mostrarBoletos(boletos);
+
+        },
+
+        error: function () {
+            alert("No se pudo cargar la lista de boletos ganadores.");
+        }
+
+    });
+
+}
+
+// MOSTRAR BOLETOS
+
+function mostrarBoletos(lista) {
 
     $("#lista-boletos").empty();
 
     $.each(lista, function (i, boleto) {
 
-        let pagado = boleto.estado === "Pagado";
+        let pagado = boleto.estado === "pagado";
 
         let boton = pagado
-          ? `<button type="button" class="btn btn-pagado btn-sm" disabled>Pagado</button>`
-         : BotonPagar.crear(boleto.numero);
+            ? `<button type="button" class="btn btn-pagado btn-sm" disabled>Pagado</button>`
+            : BotonPagar.crear(boleto.numero);
 
         $("#lista-boletos").append(`
 
             <tr>
-
-                <td>${boleto.numero}</td>
-
-                <td>${boleto.modalidad}</td>
-
-                <td>${boleto.jugada}</td>
-
-                <td>${boleto.sorteo}</td>
-                
-                <td>${boleto.estado}</td>
+                <td>${esc(boleto.numero)}</td>
+                <td>${esc(boleto.modalidad)}</td>
+                <td>${esc(boleto.jugada)}</td>
+                <td>${esc(boleto.sorteo)}</td>
+                <td>${esc(boleto.estado)}</td>
                 <td>${boleto.premio.toLocaleString("es-DO")}</td>
                 <td>
                     <select class="form-select form-select-sm metodo-pago"
@@ -171,34 +149,27 @@ function cargarGanadores() {
     });
 
 }
- 
- 
-// =============================================
+
 // PAGAR PREMIO
-// =============================================
- 
+
 $(document).on("click", ".btn-pagar", function () {
 
-    let numero = $(this).data("numero");
-    let metodo = $(this).closest("tr").find(".metodo-pago").val();
-    let cuenta = $(this).closest("tr").find(".cuenta-cliente").val().trim();
+    let boton = $(this);
+    let numero = boton.data("numero");
+    let fila = boton.closest("tr");
+    let metodo = fila.find(".metodo-pago").val();
+    let cuenta = fila.find(".cuenta-cliente").val().trim();
 
     let boleto = boletos.find(function (b) {
-
         return String(b.numero) === String(numero);
-
     });
 
     if (!boleto) {
-
         return;
-
     }
 
     // Evitar doble pago
-
-    if (boleto.estado === "Pagado") {
-
+    if (boleto.estado === "pagado") {
         alert("Este boleto ya fue pagado.");
         return;
     }
@@ -207,72 +178,68 @@ $(document).on("click", ".btn-pagar", function () {
     if (metodo === "transferencia" && cuenta === "") {
         alert("Debes escribir la cuenta del cliente para pagar por transferencia.");
         return;
-
     }
 
-    boleto.estado = "Pagado";
+    // Evita pulsar dos veces mientras se guarda
+    boton.prop("disabled", true);
 
-    $("#estado-reclamacion").val("pagado");
-    $("#resultado-reclamacion").text("El premio ha sido pagado.");
+    $.ajax({
 
-    $("#comprobante").html(`
+        url: "registrar_pago.php",
+        type: "POST",
+        dataType: "json",
+        data: { numero: numero, metodo: metodo, cuenta: cuenta },
 
-        <h3>Comprobante de Pago</h3>
+        success: function (resp) {
 
-        <p>
-            <strong>Boleto:</strong>
-            ${boleto.numero}
-        </p>
+            // El premio que cuenta es el que calculó el servidor
+            boleto.estado = "pagado";
+            boleto.premio = resp.premio;
 
-        <p>
-            <strong>Modalidad:</strong>
-            ${boleto.modalidad}
-        </p>
+            $("#estado-reclamacion").val("pagado");
+            $("#resultado-reclamacion").text("El premio ha sido pagado.");
 
-        <p>
-            <strong>Jugada:</strong>
-            ${boleto.jugada}
-        </p>
+            $("#comprobante").html(`
 
-        <p>
-            <strong>Sorteo:</strong>
-            ${boleto.sorteo}
-        </p>
+                <h3>Comprobante de Pago</h3>
 
-        <p>
-            <strong>Premio:</strong>
-            RD$ ${boleto.premio.toLocaleString("es-DO")}
-        </p>
+                <p><strong>Boleto:</strong> ${esc(boleto.numero)}</p>
+                <p><strong>Modalidad:</strong> ${esc(boleto.modalidad)}</p>
+                <p><strong>Jugada:</strong> ${esc(boleto.jugada)}</p>
+                <p><strong>Sorteo:</strong> ${esc(boleto.sorteo)}</p>
+                <p><strong>Monto pagado:</strong> RD$ ${resp.premio.toLocaleString("es-DO")}</p>
+                <p><strong>Método de pago:</strong> ${resp.metodo === "transferencia" ? "Transferencia" : "Efectivo"}</p>
 
-        <p>
-            <strong>Monto pagado:</strong>
-            RD$ ${boleto.premio.toLocaleString("es-DO")}
-       </p>
+                ${resp.metodo === "transferencia" ? `
+                <p><strong>Cuenta del cliente:</strong> ${esc(resp.cuenta)}</p>` : ""}
 
-        <p>
-            <strong>Método de pago:</strong>
-            ${metodo === "transferencia" ? "Transferencia" : "Efectivo"}
-        </p>
+                <p><strong>Estado:</strong> Pagado</p>
 
-        ${metodo === "transferencia" ? `
-        <p>
-            <strong>Cuenta del cliente:</strong>
-            ${cuenta}
-        </p>` : ""}
+            `);
 
-        <p>
-            <strong>Estado:</strong>
-            Pagado
-        </p>
+            mostrarBoletos(boletos);
 
-    `);
-    // Mostrar el campo de cuenta solo si elige transferencia
+        },
 
-    mostrarBoletos(boletos);
+        error: function (xhr) {
 
+            let mensaje = "No se pudo registrar el pago.";
 
-}
-);
+            if (xhr.responseJSON && xhr.responseJSON.mensaje) {
+                mensaje = xhr.responseJSON.mensaje;
+            }
+
+            alert(mensaje);
+            boton.prop("disabled", false);
+
+        }
+
+    });
+
+});
+
+// Mostrar el campo de cuenta solo si elige transferencia
+
 $(document).on("change", ".metodo-pago", function () {
 
     let campo = $(this).closest("td").find(".cuenta-cliente");
