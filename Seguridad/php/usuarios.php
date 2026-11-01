@@ -135,145 +135,84 @@ $usuarios = $q->fetchAll();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Administración de usuarios | Consorcio de Bancas</title>
-    <link rel="stylesheet" href="<?= escapar($base) ?>/css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= escapar($base) ?>/css/estilos.css?v=3">
 </head>
 
-<body>
-    <main class="admin-contenedor">
-
-        <header class="barra-superior">
+<body class="dashboard-body">
+    <main class="container py-4 py-lg-5">
+        <header class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
             <div>
-                <p class="sobrelinea">CONSORCIO DE BANCAS</p>
-                <h1>Administración de usuarios</h1>
-                <p class="texto-secundario">
-                    Bienvenido, <?= escapar($_SESSION["usuario"]) ?>.
-                </p>
+                <div class="small fw-bold text-success text-uppercase">Consorcio de Bancas</div>
+                <h1 class="h2 fw-bold mt-2 mb-1">Administración de usuarios</h1>
+                <p class="text-secondary mb-0">Bienvenido, <?= escapar($_SESSION["usuario"]) ?>.</p>
             </div>
-
-            <div class="acciones-superiores">
-                <a class="boton boton-secundario"
-                    href="/ConsorcioDeBancas/index.php">
-                    ← Volver al panel principal
-                </a>
-
-                <form action="<?= escapar($base) ?>/php/cerrar_sesion.php" method="post">
-                    <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
-                    <button class="boton boton-secundario" type="submit">
-                        Cerrar sesión
-                    </button>
+            <div class="d-flex flex-wrap gap-2"><a class="btn btn-outline-success" href="/ConsorcioDeBancas/index.php">← Volver al panel</a>
+                <form action="<?= escapar($base) ?>/php/cerrar_sesion.php" method="post"><input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
+                    <button class="btn btn-outline-secondary" type="submit">Cerrar sesión</button>
                 </form>
             </div>
         </header>
-
-        <?php if ($mensaje !== ""): ?>
-            <p class="mensaje <?= escapar($tipo) ?>" role="status">
-                <?= escapar($mensaje) ?>
-            </p>
-        <?php endif; ?>
-
-        <section class="tarjeta">
-            <h2>Registrar usuario</h2>
-
-            <form method="post" action="<?= escapar($base) ?>/php/usuarios.php"
-                class="form-grid">
-
-                <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
-                <input type="hidden" name="accion" value="registrar">
-
-                <div class="campo">
-                    <label for="usuario">Nombre de usuario</label>
-                    <input id="usuario" name="usuario" minlength="3" maxlength="50"
-                        pattern="[a-zA-Z0-9_.-]+" required>
-                </div>
-
-                <div class="campo">
-                    <label for="clave">Contraseña (mínimo 8 caracteres)</label>
-                    <input type="password" id="clave" name="clave"
-                        minlength="8" required>
-                </div>
-
-                <div class="campo">
-                    <label for="rol">Rol</label>
-                    <select id="rol" name="rol">
-                        <option value="agente">Agente</option>
-                        <option value="admin">Administrador</option>
-                    </select>
-                </div>
-
-                <div class="campo">
-                    <button class="boton boton-principal" type="submit">
-                        Registrar usuario
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <section class="tarjeta">
-            <h2>Usuarios registrados</h2>
-
-            <div class="tabla-contenedor">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Usuario</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <?php foreach ($usuarios as $u): ?>
-                            <tr>
-                                <td><?= (int)$u["id"] ?></td>
-                                <td><?= escapar($u["usuario"]) ?></td>
-                                <td><?= escapar(ucfirst($u["rol"])) ?></td>
-                                <td>
-                                    <span class="estado <?= (int)$u["activo"] === 1 ? "activo" : "inactivo" ?>">
-                                        <?= (int)$u["activo"] === 1 ? "Activo" : "Inactivo" ?>
-                                    </span>
-                                </td>
-                                <td><?= escapar($u["fecha_creacion"] ?? "") ?></td>
-                                <td>
-                                    <?php if ((int)$u["id"] === (int)$_SESSION["usuario_id"]): ?>
-                                        Tu cuenta
-                                    <?php else: ?>
-                                        <form method="post" action="<?= escapar($base) ?>/php/usuarios.php">
-
-                                            <a class="boton boton-secundario"
-                                                href="/ConsorcioDeBancas/Seguridad/php/permisos.php?id=<?= (int)$u['id'] ?>">
-                                                Permisos
-                                            </a>
-
-                                            <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
-                                            <input type="hidden" name="accion" value="estado">
-                                            <input type="hidden" name="id" value="<?= (int)$u["id"] ?>">
-                                            <input type="hidden" name="nuevo_estado"
-                                                value="<?= (int)$u["activo"] === 1 ? 0 : 1 ?>">
-
-                                            <button class="boton <?= (int)$u["activo"] === 1 ? "boton-peligro" : "boton-principal" ?>"
-                                                type="submit">
-                                                <?= (int)$u["activo"] === 1 ? "Desactivar" : "Activar" ?>
-                                            </button>
-                                        </form>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-
-                        <?php if (!$usuarios): ?>
-                            <tr>
-                                <td colspan="6">No hay usuarios registrados.</td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+        <?php if ($mensaje !== ""): ?><div class="alert alert-<?= $tipo === "exito" ? "success" : "danger" ?>" role="status"><?= escapar($mensaje) ?></div><?php endif; ?>
+        <section class="card border-0 shadow-sm mb-4">
+            <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-3">Registrar usuario</h2>
+                <form method="post" action="<?= escapar($base) ?>/php/usuarios.php" class="row g-3 align-items-end">
+                    <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>"><input type="hidden" name="accion" value="registrar">
+                    <div class="col-12 col-md-4"><label for="usuario" class="form-label">Nombre de usuario</label><input class="form-control" id="usuario" name="usuario" minlength="3" maxlength="50" pattern="[a-zA-Z0-9_.-]+" required></div>
+                    <div class="col-12 col-md-4"><label for="clave" class="form-label">Contraseña (mínimo 8 caracteres)</label><input class="form-control" type="password" id="clave" name="clave" minlength="8" required></div>
+                    <div class="col-12 col-md-2"><label for="rol" class="form-label">Rol</label><select class="form-select" id="rol" name="rol">
+                            <option value="agente">Agente</option>
+                            <option value="admin">Administrador</option>
+                        </select></div>
+                    <div class="col-12 col-md-2"><button class="btn btn-success w-100" type="submit">Registrar</button></div>
+                </form>
             </div>
         </section>
-
+        <section class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h5 fw-bold mb-0">Usuarios registrados</h2><span class="badge rounded-pill text-bg-light border"><?= count($usuarios) ?> usuarios</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($usuarios as $u): ?><tr>
+                                    <td><?= (int)$u["id"] ?></td>
+                                    <td class="fw-semibold"><?= escapar($u["usuario"]) ?></td>
+                                    <td><?= escapar(ucfirst($u["rol"])) ?></td>
+                                    <td><span class="badge rounded-pill <?= (int)$u["activo"] === 1 ? "text-bg-success" : "text-bg-secondary" ?>"><?= (int)$u["activo"] === 1 ? "Activo" : "Inactivo" ?></span></td>
+                                    <td><?= escapar($u["fecha_creacion"] ?? "") ?></td>
+                                    <td><?php if ((int)$u["id"] === (int)$_SESSION["usuario_id"]): ?><span class="text-secondary small">Tu cuenta</span><?php else: ?>
+                                            <div class="d-flex flex-wrap gap-2"><a class="btn btn-sm btn-outline-success" href="<?= escapar($base) ?>/php/permisos.php?id=<?= (int)$u["id"] ?>">Permisos</a>
+                                                <form method="post" action="<?= escapar($base) ?>/php/usuarios.php"><input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
+                                                    <input type="hidden" name="accion" value="estado"><input type="hidden" name="id" value="<?= (int)$u["id"] ?>">
+                                                    <input type="hidden" name="nuevo_estado" value="<?= (int)$u["activo"] === 1 ? 0 : 1 ?>">
+                                                    <button class="btn btn-sm <?= (int)$u["activo"] === 1 ? "btn-outline-danger" : "btn-success" ?>" type="submit"><?= (int)$u["activo"] === 1 ? "Desactivar" : "Activar" ?></button>
+                                                </form>
+                                            </div><?php endif; ?>
+                                    </td>
+                                </tr><?php endforeach; ?>
+                            <?php if (!$usuarios): ?><tr>
+                                    <td colspan="6" class="text-center text-secondary py-4">No hay usuarios registrados.</td>
+                                </tr><?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
