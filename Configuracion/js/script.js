@@ -260,36 +260,62 @@ function actualizarJuegos() {
 actualizarLoterias();
 actualizarSorteos();
 
+
 $(document).ready(function () {
+    $("#btnAgregarLoteria").on("click", async function () {
+        const nombre = $("#nombreLoteria").val().trim();
 
-    // Detectar cuando se pulsa el botón Guardar lotería
-    $("#btnAgregarLoteria").on("click", function () {
-
-        var nombre = $("#nombreLoteria").val().trim();
-
-        // Validar que el nombre no esté vacío
         if (nombre === "") {
             alert("Escriba el nombre de la lotería");
             $("#nombreLoteria").focus();
             return;
         }
 
-        // Reutilizar tu función existente
-        agregarLoteria();
+        const boton = $(this);
+        boton.prop("disabled", true);
 
+        try {
+            const respuesta = await fetch("php/agregar_loteria.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nombre: nombre })
+            });
+
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok || !resultado.ok) {
+                alert(resultado.mensaje || "No se pudo registrar la lotería.");
+                return;
+            }
+
+            // Evita duplicar el registro en la lista local.
+            if (!loterias.some(
+                nombreExistente =>
+                    nombreExistente.toLowerCase() === resultado.nombre.toLowerCase()
+            )) {
+                loterias.push(resultado.nombre);
+            }
+
+            $("#nombreLoteria").val("").removeClass("campo-error");
+            actualizarLoterias();
+            alert(resultado.mensaje);
+
+        } catch (error) {
+            console.error(error);
+            alert("No se pudo comunicar con el servidor PHP.");
+        } finally {
+            boton.prop("disabled", false);
+        }
     });
 
-    // Validar el campo mientras el usuario escribe
     $("#nombreLoteria").on("input", function () {
-
-        var nombre = $(this).val().trim();
-
-        if (nombre === "") {
+        if ($(this).val().trim() === "") {
             $(this).addClass("campo-error");
         } else {
             $(this).removeClass("campo-error");
         }
-
     });
-
 });
+

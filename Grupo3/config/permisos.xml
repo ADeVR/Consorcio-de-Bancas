@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permisos modulo="caja" version="1.0">
+  <permiso codigo="caja.ver_saldo" descripcion="Ver saldo y movimientos">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="turno"/></permiso>
+  <permiso codigo="caja.iniciar_efectivo" descripcion="Iniciar entrega o retiro">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="ninguno"/></permiso>
+  <permiso codigo="caja.confirmar_efectivo" descripcion="Confirmar o rechazar entrega o retiro">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="ninguno"/><rol codigo="agente" alcance="turno"/></permiso>
+  <permiso codigo="caja.relevo" descripcion="Registrar y confirmar relevo de turno">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="ninguno"/><rol codigo="agente" alcance="turno"/></permiso>
+  <permiso codigo="caja.cerrar" descripcion="Registrar efectivo contado y cerrar caja">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="ninguno"/><rol codigo="agente" alcance="turno"/></permiso>
+  <permiso codigo="caja.autorizar_cierre" descripcion="Autorizar cierres sobre el límite y configurar el límite">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="ninguno"/></permiso>
+  <permiso codigo="reporte.consultar" descripcion="Ver reporte de caja">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="turno"/></permiso>
+  <permiso codigo="reporte.exportar" descripcion="Exportar a Excel, CSV o imprimir">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="ninguno"/></permiso>
+  <permiso codigo="pago.registrar" descripcion="Confirmar entrega de premio (permiso existente de M1)" estado="por_decidir_agente">
+    <rol codigo="superadmin" alcance="ninguno"/><rol codigo="admin" alcance="todos"/><rol codigo="agente" alcance="turno"/></permiso>
+</permisos>

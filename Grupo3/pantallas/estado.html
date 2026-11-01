@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estado de caja · Caja y Reportes</title>
+  <link rel="stylesheet" href="../public/assets/vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../public/assets/css/tokens.css">
+  <link rel="stylesheet" href="../public/assets/css/caja.css">
+  <link rel="stylesheet" href="../public/assets/css/print.css" media="print">
+</head>
+<body data-titulo="Estado de caja" data-permiso="caja.ver_saldo">
+<div id="contenido">
+
+<div id="estado-carga"></div>
+
+<div id="estado-sin-turno" class="d-none">
+  <div class="alert alert-warning mb-0" role="status">
+    <span id="estado-sin-turno-texto"></span>
+    
+  </div>
+</div>
+
+<div id="estado-error" class="d-none">
+  <div class="alert alert-danger d-flex align-items-center justify-content-between mb-0" role="alert">
+    <span id="estado-error-texto"></span>
+    <button type="button" class="btn btn-outline-danger btn-sm" id="estado-reintentar">Reintentar</button>
+  </div>
+</div>
+
+<div id="estado-vista" class="d-none">
+  <p class="text-secondary small mb-3" id="est-banca"></p>
+  <div class="row g-3 mb-4">
+    <div class="col-lg-5"><div class="card tarjeta tarjeta-saldo h-100"><div class="card-body">
+      <div class="text-secondary small">Saldo actual</div>
+      <div class="saldo-grande" id="est-saldo"></div>
+      <div class="text-secondary small" id="est-actualizado"></div>
+    </div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card tarjeta tarjeta-dato h-100"><div class="card-body">
+      <div class="text-secondary small">Turno activo</div>
+      <div class="fs-5" id="est-turno-usuario"></div>
+      <div class="text-secondary small" id="est-turno-desde"></div>
+      <div class="text-secondary small" id="est-turno-fondo"></div>
+    </div></div></div>
+    <div class="col-md-6 col-lg-3"><div class="card tarjeta tarjeta-dato h-100"><div class="card-body">
+      <div class="text-secondary small">Pendientes</div>
+      <div id="est-pend-efectivo"></div>
+      <div id="est-pend-cierres"></div>
+    </div></div></div>
+  </div>
+
+  <div id="est-aviso-agente" class="alert alert-info d-none" role="status">
+    Solo el agente del turno activo ve el saldo y los movimientos de la caja.
+  </div>
+
+  <div id="est-movimientos">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2 class="h6 mb-0">Últimos movimientos</h2>
+      <a class="btn btn-outline-primary btn-sm" data-requiere-permiso="reporte.consultar" href="reporte.html">Ver reporte</a>
+    </div>
+    <div class="tabla-scroll">
+      <table class="table table-sm align-middle caja-tabla">
+        <caption class="visually-hidden">Últimos movimientos de la caja</caption>
+        <thead><tr>
+          <th scope="col">Hora</th><th scope="col">Ticket</th><th scope="col">Operación</th>
+          <th scope="col" class="text-end">Importe</th><th scope="col">Usuario</th><th scope="col" class="text-end">Saldo</th>
+        </tr></thead>
+        <tbody id="est-ultimos"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="modal-confirmar" tabindex="-1" aria-labelledby="modal-confirmar-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h2 class="modal-title h5" id="modal-confirmar-titulo"></h2></div>
+    <div class="modal-body" id="modal-confirmar-texto"></div>
+    <div class="modal-footer"><button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+      <button type="button" class="btn btn-primary" id="modal-confirmar-ok">Confirmar</button></div>
+  </div></div>
+</div>
+<script src="sesion_estatica.js"></script>
+<script src="../public/assets/vendor/jquery/jquery.min.js"></script>
+<script src="../public/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../public/assets/js/core/api.js"></script>
+<script src="../public/assets/js/core/formato.js"></script>
+<script src="../public/assets/js/core/ui.js"></script>
+<script src="../public/assets/js/core/permisos.js"></script>
+<script src="../public/assets/js/core/filas.js"></script>
+<script src="../public/assets/js/mock/datos.js"></script>
+<script src="../public/assets/js/mock/api_mock.js"></script>
+<script src="../public/assets/js/modulos/caja/estado.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Catálogo de errores. M6 redacta el texto final; el código no cambia. -->
+<errores>
+  <error codigo="SESION_EXPIRADA" http="401" severidad="error">
+    <mensaje>Tu sesión terminó. Inicia sesión de nuevo.</mensaje>
+  </error>
+  <error codigo="SIN_PERMISO" http="403" severidad="error">
+    <mensaje>No tienes permiso para realizar esta acción.</mensaje>
+  </error>
+  <error codigo="PARAMETROS_INVALIDOS" http="422" severidad="error">
+    <mensaje>Faltan datos. Revisa el formulario.</mensaje>
+  </error>
+  <error codigo="MONTO_INVALIDO" http="422" severidad="error">
+    <mensaje>Escribe un importe mayor que cero.</mensaje>
+  </error>
+  <error codigo="JUSTIFICACION_REQUERIDA" http="422" severidad="error">
+    <mensaje>Escribe la justificación de la diferencia.</mensaje>
+  </error>
+  <error codigo="SALDO_INSUFICIENTE" http="200" severidad="advertencia">
+    <mensaje>No hay efectivo suficiente en la caja. El cliente debe acudir a la banca principal.</mensaje>
+  </error>
+  <error codigo="MOVIMIENTO_DUPLICADO" http="200" severidad="informacion">
+    <mensaje>Esta operación ya fue registrada en caja. No se repitió.</mensaje>
+  </error>
+  <error codigo="CAJA_SIN_TURNO" http="200" severidad="advertencia">
+    <mensaje>No hay un turno activo en la caja. Registra el relevo para continuar.</mensaje>
+  </error>
+  <error codigo="EFECTIVO_NO_CONFIRMADO" http="200" severidad="advertencia">
+    <mensaje>Esta entrega o retiro no está pendiente de confirmación.</mensaje>
+  </error>
+  <error codigo="CONFIRMADOR_IGUAL_A_INICIADOR" http="200" severidad="error">
+    <mensaje>Quien inicia la operación no puede confirmarla.</mensaje>
+  </error>
+  <error codigo="CIERRE_REQUIERE_AUTORIZACION" http="200" severidad="advertencia">
+    <mensaje>La diferencia supera el límite. Un administrador debe autorizar el cierre.</mensaje>
+  </error>
+  <error codigo="SOLICITUDES_PENDIENTES" http="200" severidad="advertencia">
+    <mensaje>Confirma o rechaza las entregas y retiros pendientes antes de cerrar.</mensaje>
+  </error>
+  <error codigo="RELEVO_NO_PERMITIDO" http="200" severidad="advertencia">
+    <mensaje>Primero cierra la caja del turno actual.</mensaje>
+  </error>
+  <error codigo="OPERACION_ORIGINAL_NO_ENCONTRADA" http="200" severidad="error">
+    <mensaje>No se encontró la venta original de esta anulación.</mensaje>
+  </error>
+  <error codigo="INCONSISTENCIA_SALDO" http="500" severidad="error">
+    <mensaje>Se detectó una diferencia interna. Avisa al administrador; no se cerró la caja.</mensaje>
+  </error>
+  <error codigo="ERROR_INTERNO" http="500" severidad="error">
+    <mensaje>No se pudo completar la operación. Tus datos no se perdieron. Intenta de nuevo.</mensaje>
+  </error>
+</errores>

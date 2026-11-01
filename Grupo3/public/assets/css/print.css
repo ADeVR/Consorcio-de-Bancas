@@ -1,0 +1,9 @@
+@media print {
+  .no-imprimir, .navbar-caja, .sidebar-caja, .salto { display: none !important; }
+  body { background: #fff; font-size: 11pt; }
+  main { width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; }
+  .tabla-scroll { overflow: visible; border: 0; }
+  .caja-tabla th { position: static; }
+  .tarjeta-saldo { background: #fff; color: #000; border: 1px solid #999; box-shadow: none; }
+  .tarjeta-saldo .text-secondary { color: #333 !important; }
+}

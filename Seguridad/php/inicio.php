@@ -47,7 +47,7 @@ $modulos = [
     "Pagos" => [
         "nombre" => "Pagos",
         "descripcion" => "Acceder al módulo de pagos.",
-        "ruta" => "/ConsorcioDeBancas/Grupo2Pago/Form.html"
+        "ruta" => "/ConsorcioDeBancas/Pago/"
     ]
 ];
 
