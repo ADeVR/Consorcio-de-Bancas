@@ -68,12 +68,16 @@ try {
     }
 
     // 2. Guardar el pago (numero_boleto es único: no permite pagar dos veces)
-        $q = $conexion->prepare("
+    $fecha = date('Y-m-d');
+    $hora  = date('H:i:s');
+
+    $q = $conexion->prepare("
         INSERT INTO pagos
             (numero_boleto, premio, tipo_pago, cuenta_destino, estado, fecha_pago, hora_pago, usuario_id)
         VALUES (?, ?, ?, ?, 'pagado', ?, ?, ?)
     ");
-    $q->execute([$numero, $premio, $metodo, $cuenta, date('Y-m-d'), date('H:i:s'), $usuarioId]);
+    $q->execute([$numero, $premio, $metodo, $cuenta, $fecha, $hora, $usuarioId]);
+    $idPago = (int) $conexion->lastInsertId();
 
     // 3. Marcar las líneas ganadoras del ticket como pagadas
     $q = $conexion->prepare("
@@ -85,13 +89,21 @@ try {
     ");
     $q->execute([$numero]);
 
+    $q = $conexion->prepare("SELECT usuario FROM usuarios WHERE id = ?");
+    $q->execute([$usuarioId]);
+    $cajero = $q->fetchColumn() ?: 'Desconocido';
+    
     $conexion->commit();
 
-    responder(true, [
-        "numero" => $numero,
-        "premio" => (float) $premio,
-        "metodo" => $metodo,
-        "cuenta" => $cuenta
+       responder(true, [
+        "id_pago" => $idPago,
+        "numero"  => $numero,
+        "premio"  => (float) $premio,
+        "metodo"  => $metodo,
+        "cuenta"  => $cuenta,
+        "fecha"   => $fecha,
+        "hora"    => $hora,
+        "cajero"  => $cajero
     ]);
 
 } catch (PDOException $e) {

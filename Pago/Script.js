@@ -205,8 +205,9 @@ $(document).on("click", ".btn-pagar", function () {
             $("#resultado-reclamacion").text("El premio ha sido pagado.");
 
             $("#comprobante").html(`
-
                 <h3>Comprobante de Pago</h3>
+                
+                <p><strong>Comprobante N.º:</strong> ${esc(resp.id_pago)}</p>
 
                 <p><strong>Boleto:</strong> ${esc(boleto.numero)}</p>
                 <p><strong>Modalidad:</strong> ${esc(boleto.modalidad)}</p>
@@ -219,6 +220,8 @@ $(document).on("click", ".btn-pagar", function () {
                 <p><strong>Cuenta del cliente:</strong> ${esc(resp.cuenta)}</p>` : ""}
 
                 <p><strong>Estado:</strong> Pagado</p>
+                <p><strong>Fecha y hora:</strong> ${esc(resp.fecha.split("-").reverse().join("/"))} ${esc(resp.hora)}</p>
+                <p><strong>Atendido por:</strong> ${esc(resp.cajero)}</p>
 
             `);
 
