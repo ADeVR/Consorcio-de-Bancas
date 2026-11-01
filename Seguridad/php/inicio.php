@@ -27,27 +27,27 @@ $modulos = [
     "Configuracion" => [
         "nombre" => "Configuración",
         "descripcion" => "Administrar la configuración de las loterías.",
-        "ruta" => "/ConsorcioDeBancas/Configuracion/"
+        "ruta" => "/ConsorcioDeBancas/Configuracion/Configuracion.html"
     ],
-    "Apertura" => [
-        "nombre" => "Apertura",
-        "descripcion" => "Acceder al módulo de apertura.",
-        "ruta" => "/ConsorcioDeBancas/Apertura/"
+    "Caja y Reportes" => [
+        "nombre" => "Caja y Reportes",
+        "descripcion" => "Acceder al módulo de Caja y Reportes.",
+        "ruta" => "/ConsorcioDeBancas/Grupo3/"
     ],
     "Jugar" => [
         "nombre" => "Jugar",
         "descripcion" => "Acceder al módulo de juego.",
         "ruta" => "/ConsorcioDeBancas/Jugar/"
     ],
-    "Cierre" => [
-        "nombre" => "Cierre",
-        "descripcion" => "Acceder al módulo de cierre.",
-        "ruta" => "/ConsorcioDeBancas/Cierre/"
+    "Numeros Ganadore" => [
+        "nombre" => "Numeros Ganadores",
+        "descripcion" => "Acceder al módulo de Numeros Ganadores.",
+        "ruta" => "/ConsorcioDeBancas/Grupo5/"
     ],
     "Pagos" => [
         "nombre" => "Pagos",
         "descripcion" => "Acceder al módulo de pagos.",
-        "ruta" => "/ConsorcioDeBancas/Grupo2Pago/"
+        "ruta" => "/ConsorcioDeBancas/Grupo2Pago/Form.html"
     ]
 ];
 
@@ -75,7 +75,7 @@ $token = tokenCsrf();
 
     <link
         rel="stylesheet"
-        href="<?= escapar($baseSeguridad) ?>/css/seguridad.css">
+        href="<?= escapar($baseSeguridad) ?>/css/estilos.css">
 </head>
 
 <body>

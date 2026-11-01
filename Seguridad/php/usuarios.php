@@ -135,7 +135,7 @@ $usuarios = $q->fetchAll();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Administración de usuarios | Consorcio de Bancas</title>
-    <link rel="stylesheet" href="<?= escapar($base) ?>/css/seguridad.css">
+    <link rel="stylesheet" href="<?= escapar($base) ?>/css/estilos.css">
 </head>
 
 <body>
@@ -150,12 +150,19 @@ $usuarios = $q->fetchAll();
                 </p>
             </div>
 
-            <form action="<?= escapar($base) ?>/php/cerrar_sesion.php" method="post">
-                <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
-                <button class="boton boton-secundario" type="submit">
-                    Cerrar sesión
-                </button>
-            </form>
+            <div class="acciones-superiores">
+                <a class="boton boton-secundario"
+                    href="/ConsorcioDeBancas/index.php">
+                    ← Volver al panel principal
+                </a>
+
+                <form action="<?= escapar($base) ?>/php/cerrar_sesion.php" method="post">
+                    <input type="hidden" name="token_csrf" value="<?= escapar($t) ?>">
+                    <button class="boton boton-secundario" type="submit">
+                        Cerrar sesión
+                    </button>
+                </form>
+            </div>
         </header>
 
         <?php if ($mensaje !== ""): ?>

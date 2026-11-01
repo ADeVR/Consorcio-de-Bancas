@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . "/conexion.php";
 require_once __DIR__ . "/funciones.php";
@@ -10,7 +9,7 @@ $rutaBase = "/ConsorcioDeBancas/Seguridad";
 if (!empty($_SESSION["usuario_id"])) {
 
     if (($_SESSION["rol"] ?? "") === "admin") {
-        header("Location: " . $rutaBase . "/php/usuarios.php");
+        header("Location: " . $rutaBase . "/php/inicio.php");
     } else {
         header("Location: " . $rutaBase . "/php/inicio.php");
     }
@@ -27,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!csrfValido()) {
 
         $mensaje = "El formulario venció. Recarga la página e inténtalo otra vez.";
-
     } else {
 
         $nombre = trim((string)($_POST["usuario"] ?? ""));
@@ -66,23 +64,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($usuario["rol"] === "admin") {
 
                 header(
-                    "Location: " . $rutaBase . "/php/usuarios.php"
+                    "Location: " . $rutaBase . "/php/inicio.php"
                 );
-
             } else {
 
                 header(
                     "Location: " . $rutaBase . "/php/inicio.php"
                 );
-
             }
 
             exit;
-
         } else {
 
             $mensaje = "Usuario o contraseña incorrectos, o cuenta inactiva.";
-
         }
     }
 }
@@ -102,8 +96,9 @@ $token = tokenCsrf();
 
     <link
         rel="stylesheet"
-        href="<?= escapar($rutaBase) ?>/css/seguridad.css"
-    >
+        href="<?= escapar($rutaBase) ?>/css/estilos.css">
+
+        
 </head>
 
 <body class="pagina-login">
@@ -130,14 +125,12 @@ $token = tokenCsrf();
 
             <form
                 method="POST"
-                action="<?= escapar($rutaBase) ?>/php/login.php"
-            >
+                action="<?= escapar($rutaBase) ?>/php/login.php">
 
                 <input
                     type="hidden"
                     name="token_csrf"
-                    value="<?= escapar($token) ?>"
-                >
+                    value="<?= escapar($token) ?>">
 
                 <div class="campo">
 
@@ -152,8 +145,7 @@ $token = tokenCsrf();
                         maxlength="50"
                         autocomplete="username"
                         required
-                        autofocus
-                    >
+                        autofocus>
 
                 </div>
 
@@ -170,14 +162,12 @@ $token = tokenCsrf();
                             id="clave"
                             name="clave"
                             autocomplete="current-password"
-                            required
-                        >
+                            required>
 
                         <button
                             type="button"
                             id="mostrarClave"
-                            class="boton-mostrar"
-                        >
+                            class="boton-mostrar">
                             Ver
                         </button>
 
@@ -187,8 +177,7 @@ $token = tokenCsrf();
 
                 <button
                     class="boton boton-principal boton-ancho"
-                    type="submit"
-                >
+                    type="submit">
                     Iniciar sesión
                 </button>
 
@@ -204,8 +193,8 @@ $token = tokenCsrf();
 
     <script
         src="<?= escapar($rutaBase) ?>/js/seguridad.js"
-        defer
-    ></script>
+        defer></script>
 
 </body>
+
 </html>

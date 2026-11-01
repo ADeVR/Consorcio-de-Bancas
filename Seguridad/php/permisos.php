@@ -105,7 +105,7 @@ $t = tokenCsrf();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Permisos de usuario | Consorcio de Bancas</title>
-    <link rel="stylesheet" href="<?= escapar($base) ?>/css/seguridad.css">
+    <link rel="stylesheet" href="<?= escapar($base) ?>/css/estilos.css">
 </head>
 
 <body>
