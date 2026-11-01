@@ -1,0 +1,153 @@
+/* Estilos propios mínimos. Bootstrap 5.3.8 gestiona la estructura y componentes. */
+:root {
+    --bs-success: #087443;
+    --bs-success-rgb: 8, 116, 67;
+    --institucional: #05422d;
+    --institucional-oscuro: #0b3527;
+    --fondo-app: #f4f7f5;
+    --borde-app: #d5e2db;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #1e2a24;
+}
+
+.pagina-login,
+.dashboard-body {
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, rgba(49, 209, 113, .09), transparent 34%), var(--fondo-app);
+}
+
+.login-card {
+    max-width: 440px;
+    border-radius: 18px;
+}
+
+.brand-mark {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--institucional);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    flex: 0 0 auto;
+}
+
+.btn-success {
+    --bs-btn-bg: #087443;
+    --bs-btn-border-color: #087443;
+    --bs-btn-hover-bg: #075c36;
+    --bs-btn-hover-border-color: #075c36;
+}
+
+.btn-outline-success {
+    --bs-btn-color: #087443;
+    --bs-btn-border-color: #087443;
+    --bs-btn-hover-bg: #087443;
+    --bs-btn-hover-border-color: #087443;
+}
+
+.btn-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    font-size: 1.15rem;
+    border-radius: 11px;
+}
+
+.user-chip {
+    background: #fff;
+    border: 1px solid var(--borde-app);
+    border-radius: 14px;
+    padding: 10px 15px;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #e3f3e9;
+    color: #087443;
+    font-weight: 800;
+}
+
+.admin-callout {
+    background: #e8f5ed;
+    border: 1px solid #cfe7d8;
+    color: var(--institucional-oscuro);
+}
+
+.admin-symbol {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 1.25rem;
+}
+
+.module-card {
+    border: 1px solid var(--borde-app);
+    border-radius: 15px;
+    color: inherit;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-4px);
+    border-color: #a9cfb8;
+    box-shadow: 0 12px 25px rgba(5, 66, 45, .09);
+}
+
+.module-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: #e8f5ed;
+    color: #087443;
+    font-size: 1.25rem;
+}
+
+.empty-state,
+.permission-option {
+    background: #fff;
+    border-color: var(--borde-app) !important;
+}
+
+.permission-option {
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.permission-option:hover {
+    background: #f0f8f3;
+    border-color: #9bc9ac !important;
+}
+
+.permission-option .form-check-input {
+    width: 1.15em;
+    height: 1.15em;
+}
+
+.table thead th {
+    white-space: nowrap;
+    color: #315444;
+    font-size: .82rem;
+    text-transform: uppercase;
+}
+
+@media (max-width: 575.98px) {
+    .login-card .card-body {
+        padding: 1.5rem !important;
+    }
+}

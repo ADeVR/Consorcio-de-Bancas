@@ -38,9 +38,9 @@ function modulosSistema(): array
 {
     return [
         "Configuracion" => "Configuración",
-        "Apertura" => "Apertura",
+        "Caja y Reportes" => "Caja y Reportes",
         "Jugar" => "Jugar",
-        "Cierre" => "Cierre",
+        "Numeros Ganadores" => "Numeros Ganadores",
         "Pagos" => "Pagos"
     ];
 }
