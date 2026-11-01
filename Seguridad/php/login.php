@@ -7,13 +7,7 @@ $rutaBase = "/ConsorcioDeBancas/Seguridad";
 
 // Si ya inició sesión, enviarlo a su página.
 if (!empty($_SESSION["usuario_id"])) {
-
-    if (($_SESSION["rol"] ?? "") === "admin") {
-        header("Location: " . $rutaBase . "/php/inicio.php");
-    } else {
-        header("Location: " . $rutaBase . "/php/inicio.php");
-    }
-
+    header("Location: " . $rutaBase . "/php/inicio.php");
     exit;
 }
 

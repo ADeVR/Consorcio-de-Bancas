@@ -27,27 +27,36 @@ $modulos = [
     "Configuracion" => [
         "nombre" => "Configuración",
         "descripcion" => "Administrar la configuración de las loterías.",
-        "ruta" => "/ConsorcioDeBancas/Configuracion/Configuracion.html"
+        "ruta" => "/ConsorcioDeBancas/Configuracion/Configuracion.html",
+        "icon" => "bi-gear-fill"
     ],
+
     "Caja y Reportes" => [
         "nombre" => "Caja y Reportes",
         "descripcion" => "Acceder al módulo de Caja y Reportes.",
-        "ruta" => "/ConsorcioDeBancas/Grupo3/"
+        "ruta" => "/ConsorcioDeBancas/Grupo3/public/index.php",
+        "icon" => "bi-cash-stack"
     ],
+
     "Jugar" => [
         "nombre" => "Jugar",
         "descripcion" => "Acceder al módulo de juego.",
-        "ruta" => "/ConsorcioDeBancas/Jugar/"
+        "ruta" => "/ConsorcioDeBancas/Jugar/",
+        "icon" => "bi-controller"
     ],
+
     "Numeros Ganadore" => [
         "nombre" => "Numeros Ganadores",
         "descripcion" => "Acceder al módulo de Numeros Ganadores.",
-        "ruta" => "/ConsorcioDeBancas/Grupo5/"
+        "ruta" => "/ConsorcioDeBancas/Grupo5/Version _1/index.html",
+        "icon" => "bi-trophy-fill"
     ],
+
     "Pagos" => [
         "nombre" => "Pagos",
         "descripcion" => "Acceder al módulo de pagos.",
-        "ruta" => "/ConsorcioDeBancas/Pago/pagos.php"
+        "ruta" => "/ConsorcioDeBancas/Pago/pagos.php",
+        "icon" => "bi-wallet2"
     ]
 ];
 
@@ -75,7 +84,9 @@ $token = tokenCsrf();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Panel principal | Consorcio de Bancas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= escapar($baseSeguridad) ?>/css/estilos.css?v=3">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="<?= escapar($baseSeguridad) ?>/css/estilos.css?v=4">
 </head>
 
 <body class="dashboard-body">
@@ -89,10 +100,20 @@ $token = tokenCsrf();
                 </div>
             </div>
             <div class="d-flex align-items-center gap-2">
-                <?php if ($configuracion): ?><a class="btn btn-light border btn-icon" href="<?= escapar($configuracion["ruta"]) ?>" title="Configuración" aria-label="Configuración">⚙️</a><?php endif; ?>
+                <?php if ($configuracion): ?>
+                    <a class="btn btn-light border btn-icon"
+                        href="<?= escapar($configuracion["ruta"]) ?>"
+                        title="Configuración"
+                        aria-label="Configuración">
+                        <i class="bi bi-gear-fill"></i>
+                    </a>
+                <?php endif; ?>
                 <form action="<?= escapar($baseSeguridad) ?>/php/cerrar_sesion.php" method="post">
                     <input type="hidden" name="token_csrf" value="<?= escapar($token) ?>">
-                    <button class="btn btn-outline-secondary" type="submit"> X <span class="d-none d-sm-inline">Cerrar sesión</span></button>
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span class="d-none d-sm-inline">Cerrar sesión</span>
+                    </button>
                 </form>
             </div>
         </header>
@@ -110,7 +131,9 @@ $token = tokenCsrf();
             </div>
         </section>
         <?php if ($rol === "admin"): ?><section class="alert admin-callout d-flex flex-column flex-md-row align-items-md-center gap-3 mb-5">
-                <div class="admin-symbol">🛡️</div>
+                <div class="admin-symbol">
+                    <i class="bi bi-shield-lock-fill"></i>
+                </div>
                 <div class="flex-grow-1">
                     <div class="fw-bold">Administración del sistema</div>
                     <div class="small">Gestiona los usuarios y controla sus permisos de acceso.</div>
@@ -131,16 +154,46 @@ $token = tokenCsrf();
                     <p class="text-secondary mb-0">Comunícate con el administrador para solicitar acceso.</p>
                 </div>
             <?php else: ?><div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
-                    <?php foreach ($modulosPermitidos as $modulo): ?><div class="col"><a class="card module-card h-100 text-decoration-none" href="<?= escapar($modulo["ruta"]) ?>">
-                                <div class="card-body p-4">
-                                    <div class="d-flex justify-content-between align-items-start mb-4">
-                                        <div class="module-icon">◆</div><span class="text-secondary fs-5">↗</span>
+                    <?php foreach ($modulosPermitidos as $modulo): ?>
+
+                        <div class="col">
+                            <a class="card module-card h-100 text-decoration-none"
+                                href="<?= escapar($modulo["ruta"]) ?>">
+
+                                <div class="card-body">
+
+                                    <div class="module-card-top">
+
+                                        <div class="module-icon">
+                                            <i class="bi <?= escapar($modulo["icon"]) ?>"></i>
+                                        </div>
+
+                                        <span class="module-arrow">
+                                            <i class="bi bi-arrow-up-right"></i>
+                                        </span>
+
                                     </div>
-                                    <h3 class="h5 fw-bold text-dark"><?= escapar($modulo["nombre"]) ?></h3>
-                                    <p class="text-secondary small mb-4"><?= escapar($modulo["descripcion"]) ?></p>
-                                    <div class="small fw-semibold text-success border-top pt-3">Ingresar al módulo →</div>
+
+                                    <h3>
+                                        <?= escapar($modulo["nombre"]) ?>
+                                    </h3>
+
+                                    <p>
+                                        <?= escapar($modulo["descripcion"]) ?>
+                                    </p>
+
+                                    <div class="module-action">
+                                        Ingresar al módulo
+                                        <i class="bi bi-arrow-right"></i>
+                                    </div>
+
                                 </div>
-                            </a></div><?php endforeach; ?></div><?php endif; ?>
+
+                            </a>
+                        </div>
+
+                    <?php endforeach; ?>
+                </div><?php endif; ?>
         </section>
         <footer class="d-flex justify-content-between gap-2 border-top mt-5 pt-3 small text-secondary"><span>Consorcio de Bancas</span><span>Sistema de gestión</span></footer>
     </main>
