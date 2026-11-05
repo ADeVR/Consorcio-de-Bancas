@@ -19,6 +19,26 @@ exigirPermisoModulo("Pagos");
 </head>
 
 <body>
+  <!-- Barra superior del módulo -->
+    <div class="barra-superior">
+        <span class="barra-superior-titulo">Sistema de Consorcio de Bancas</span>
+
+        <div class="barra-superior-acciones">
+           <span class="barra-superior-usuario">Módulo 6 - Pagos | <?= escapar($_SESSION["usuario"] ?? "") ?></span>
+
+            <a class="btn btn-outline-secondary btn-sm" href="/ConsorcioDeBancas/Seguridad/php/inicio.php">Panel</a>
+
+            <?php if (tienePermisoModulo($conexion, "Jugar")): ?>
+                <a class="btn btn-outline-secondary btn-sm" href="/ConsorcioDeBancas/Jugar/">Jugar</a>
+            <?php endif; ?>
+
+            <form method="post" action="/ConsorcioDeBancas/Seguridad/php/cerrar_sesion.php" class="d-inline">
+                <input type="hidden" name="token_csrf" value="<?= escapar(tokenCsrf()) ?>">
+                <button type="submit" class="btn btn-outline-secondary btn-sm">Cerrar sesión</button>
+            </form>
+        </div>
+    </div>
+    <!-- fin de la barra superior del módulo -->
     <header class="masthead">
         <img src="image/logo.jpeg" alt="logo de modulo" class="logo">
     </header>
