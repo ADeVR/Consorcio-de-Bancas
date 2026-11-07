@@ -1,34 +1,3 @@
  /* ============================================
   Módulo 6 - Pagos
   ============================================ */
-/* ---- Barra superior  ---- */
-.barra-superior {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px 16px;
-  padding: 10px 16px;
-  background: #ffffff;
-  border-bottom: 1px solid #d5e2db;
-}
-
-.barra-superior-titulo {
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: #1E2A24;
-}
-
-.barra-superior-acciones {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-left: auto;
-}
-
-.barra-superior-usuario {
-  color: #1E2A24;
-  margin-right: 4px;
-}
