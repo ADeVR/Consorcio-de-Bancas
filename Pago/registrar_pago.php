@@ -53,7 +53,7 @@ try {
     // 1. Premio total del ticket, calculado en el servidor
     $q = $conexion->prepare("
         SELECT SUM(d.monto * pj.valor_por_peso) AS premio
-        FROM numero_ganador_prueba g
+        FROM numero_ganador g
         JOIN jugada_detalle d ON d.id_detalle = g.id_detalle
         JOIN ticket t         ON t.id_ticket  = d.id_ticket
         JOIN premios_juego pj ON pj.id        = g.id_premio
@@ -68,30 +68,42 @@ try {
     }
 
     // 2. Guardar el pago (numero_boleto es único: no permite pagar dos veces)
-        $q = $conexion->prepare("
+    $fecha = date('Y-m-d');
+    $hora  = date('H:i:s');
+
+    $q = $conexion->prepare("
         INSERT INTO pagos
             (numero_boleto, premio, tipo_pago, cuenta_destino, estado, fecha_pago, hora_pago, usuario_id)
         VALUES (?, ?, ?, ?, 'pagado', ?, ?, ?)
     ");
-    $q->execute([$numero, $premio, $metodo, $cuenta, date('Y-m-d'), date('H:i:s'), $usuarioId]);
+    $q->execute([$numero, $premio, $metodo, $cuenta, $fecha, $hora, $usuarioId]);
+    $idPago = (int) $conexion->lastInsertId();
 
     // 3. Marcar las líneas ganadoras del ticket como pagadas
     $q = $conexion->prepare("
         UPDATE jugada_detalle d
         JOIN ticket t         ON t.id_ticket  = d.id_ticket
-        JOIN numero_ganador_prueba g ON g.id_detalle = d.id_detalle
+        JOIN numero_ganador g ON g.id_detalle = d.id_detalle
         SET d.estado = 'pagada'
         WHERE t.codigo_ticket = ?
     ");
     $q->execute([$numero]);
 
+    $q = $conexion->prepare("SELECT usuario FROM usuarios WHERE id = ?");
+    $q->execute([$usuarioId]);
+    $cajero = $q->fetchColumn() ?: 'Desconocido';
+    
     $conexion->commit();
 
-    responder(true, [
-        "numero" => $numero,
-        "premio" => (float) $premio,
-        "metodo" => $metodo,
-        "cuenta" => $cuenta
+       responder(true, [
+        "id_pago" => $idPago,
+        "numero"  => $numero,
+        "premio"  => (float) $premio,
+        "metodo"  => $metodo,
+        "cuenta"  => $cuenta,
+        "fecha"   => $fecha,
+        "hora"    => $hora,
+        "cajero"  => $cajero
     ]);
 
 } catch (PDOException $e) {
