@@ -9,7 +9,7 @@
     <title>Configuración de Loterías</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- 2. Estilos compartidos del proyecto -->
     <link rel="stylesheet" href="../estilosglobal.css">
@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <!-- Encabezado -->
-    <header class="bg-primary text-white py-4 mb-4 shadow-sm">
+    <header class="marco-superior mb-4 shadow-sm">
         <div class="container">
-            <h1 class="h2 mb-1">Configuración de Loterías</h1>
+            <h1 class="h2 mb-1 text-white">Configuración de Loterías</h1>
             <p class="mb-0">
                 Administración de loterías, sorteos, modalidades y premios
             </p>
@@ -32,8 +32,39 @@
 
     <main class="container pb-5">
 
+        <section class="config-overview mb-4" aria-label="Resumen de configuración">
+            <div class="config-overview-heading">
+                <div>
+                    <p class="config-eyebrow mb-1">CENTRO DE ADMINISTRACIÓN</p>
+                    <h2 class="h4 mb-1">Configuración del sistema</h2>
+                    <p class="text-secondary mb-0">Administra loterías, horarios y reglas de premios desde un solo lugar.</p>
+                </div>
+                <span class="config-status"><span aria-hidden="true"></span> Módulo de configuración</span>
+            </div>
+
+            <nav class="config-widgets" aria-label="Ir a una sección">
+                <a class="config-widget" href="#seccion-loterias">
+                    <span class="widget-number">01</span>
+                    <span><strong>Loterías</strong><small>Catálogo principal</small></span>
+                    <span class="widget-arrow" aria-hidden="true">→</span>
+                </a>
+                <a class="config-widget" href="#seccion-sorteos">
+                    <span class="widget-number">02</span>
+                    <span><strong>Sorteos</strong><small>Horarios y días</small></span>
+                    <span class="widget-arrow" aria-hidden="true">→</span>
+                </a>
+                <a class="config-widget" href="#seccion-modalidades">
+                    <span class="widget-number">03</span>
+                    <span><strong>Modalidades</strong><small>Límites y premios</small></span>
+                    <span class="widget-arrow" aria-hidden="true">→</span>
+                </a>
+            </nav>
+        </section>
+
+        <div class="row g-4 align-items-stretch mb-4">
+            <div class="col-lg-6">
         <!-- SECCIÓN 1: LOTERÍAS -->
-        <section class="card shadow-sm mb-4">
+        <section id="seccion-loterias" class="card config-card shadow-sm h-100">
 
             <div class="card-header bg-white py-3">
                 <h2 class="h5 mb-0">1. Registrar lotería</h2>
@@ -59,7 +90,7 @@
                         <button
                             id="btnAgregarLoteria"
                             type="button"
-                            class="btn btn-primary w-100">
+                            class="btn btn-principal w-100">
                             Guardar lotería
                         </button>
                     </div>
@@ -73,9 +104,11 @@
 
             </div>
         </section>
+            </div>
 
+            <div class="col-lg-6">
         <!-- SECCIÓN 2: SORTEOS -->
-        <section class="card shadow-sm mb-4">
+        <section id="seccion-sorteos" class="card config-card shadow-sm h-100">
 
             <div class="card-header bg-white py-3">
                 <h2 class="h5 mb-0">2. Registrar sorteo</h2>
@@ -174,7 +207,7 @@
                     <div class="col-12">
                         <button
                             type="button"
-                            class="btn btn-success"
+                            class="btn btn-principal"
                             onclick="agregarSorteo()">
                             Guardar sorteo
                         </button>
@@ -189,9 +222,11 @@
 
             </div>
         </section>
+            </div>
+        </div>
 
         <!-- SECCIÓN 3: MODALIDADES Y PREMIOS -->
-        <section class="card shadow-sm mb-4">
+        <section id="seccion-modalidades" class="card config-card shadow-sm mb-4">
 
             <div class="card-header bg-white py-3">
                 <h2 class="h5 mb-0">3. Configurar modalidad y premios</h2>
@@ -352,7 +387,7 @@
                 <div class="mt-4">
                     <button
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-principal"
                         onclick="agregarJuego()">
                         Guardar modalidad
                     </button>

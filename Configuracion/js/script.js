@@ -1,7 +1,50 @@
 
-var loterias = ["LEIDSA", "LOTEKA"];
+var loterias = [];
 var sorteos = [];
 var juegos = [];
+
+async function leerRespuestaJson(respuesta) {
+    const texto = await respuesta.text();
+    try {
+        return JSON.parse(texto);
+    } catch (error) {
+        throw new Error(
+            "El servidor no devolvió una respuesta PHP válida. Live Server no ejecuta PHP; inicia Apache/XAMPP y abre Configuración desde localhost."
+        );
+    }
+}
+
+async function cargarConfiguracion() {
+    try {
+        const respuesta = await fetch("php/api.php");
+        const datos = await leerRespuestaJson(respuesta);
+        if (!respuesta.ok || !datos.ok) {
+            throw new Error(datos.mensaje || "No se pudo cargar la configuración.");
+        }
+
+        loterias = datos.loterias || [];
+        sorteos = datos.sorteos || [];
+        juegos = datos.juegos || [];
+        actualizarLoterias();
+        actualizarSorteos();
+    } catch (error) {
+        console.error(error);
+        alert(error.message || "No se pudo cargar la configuración guardada.");
+    }
+}
+
+async function guardarRegistro(datos) {
+    const respuesta = await fetch("php/api.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+    });
+    const resultado = await leerRespuestaJson(respuesta);
+    if (!respuesta.ok || !resultado.ok) {
+        throw new Error(resultado.mensaje || "No se pudo guardar el registro.");
+    }
+    return resultado;
+}
 
 function actualizarLoterias() {
 
@@ -14,12 +57,12 @@ function actualizarLoterias() {
     for (var i = 0; i < loterias.length; i++) {
 
         var elemento = document.createElement("li");
-        elemento.textContent = loterias[i];
+        elemento.textContent = loterias[i].nombre;
         lista.appendChild(elemento);
 
         var opcion = document.createElement("option");
-        opcion.value = loterias[i];
-        opcion.textContent = loterias[i];
+        opcion.value = loterias[i].id;
+        opcion.textContent = loterias[i].nombre;
         selector.appendChild(opcion);
     }
 }
@@ -37,7 +80,7 @@ function actualizarSorteos() {
         var sorteo = sorteos[i];
 
         var opcion = document.createElement("option");
-        opcion.value = i;
+        opcion.value = sorteo.id;
         opcion.textContent =
             sorteo.loteria + " - " + sorteo.nombre;
 
@@ -48,7 +91,7 @@ function actualizarSorteos() {
             sorteo.loteria + " | " +
             sorteo.nombre + " | " +
             sorteo.hora + " | " +
-            sorteo.dias.join(", ");
+            (sorteo.dias || []).join(", ");
 
         lista.appendChild(elemento);
     }
@@ -67,18 +110,21 @@ function agregarLoteria() {
 
     for (var i = 0; i < loterias.length; i++) {
 
-        if (loterias[i].toLowerCase() == nombre.toLowerCase()) {
+        if (loterias[i].nombre.toLowerCase() == nombre.toLowerCase()) {
             alert("Esta lotería ya está registrada");
             return;
         }
     }
 
-    loterias.push(nombre);
-
-    document.getElementById("nombreLoteria").value = "";
-
-    actualizarLoterias();
-    alert("Lotería registrada correctamente");
+    const boton = document.getElementById("btnAgregarLoteria");
+    boton.disabled = true;
+    guardarRegistro({ accion: "loteria", nombre: nombre })
+        .then(function (resultado) {
+            document.getElementById("nombreLoteria").value = "";
+            return cargarConfiguracion().then(function () { alert(resultado.mensaje); });
+        })
+        .catch(function (error) { alert(error.message); })
+        .finally(function () { boton.disabled = false; });
 }
 
 function agregarSorteo() {
@@ -112,23 +158,26 @@ function agregarSorteo() {
         return;
     }
 
-    sorteos.push({
-        loteria: loteria,
+    var boton = document.querySelector("#seccion-sorteos button");
+    boton.disabled = true;
+    guardarRegistro({
+        accion: "sorteo",
+        loteria_id: loteria,
         nombre: nombre,
         hora: hora,
         dias: dias
+    }).then(function (resultado) {
+        document.getElementById("nombreSorteo").value = "";
+        document.getElementById("horaSorteo").value = "";
+        for (var i = 0; i < diasSeleccionados.length; i++) {
+            diasSeleccionados[i].checked = false;
+        }
+        return cargarConfiguracion().then(function () { alert(resultado.mensaje); });
+    }).catch(function (error) {
+        alert(error.message);
+    }).finally(function () {
+        boton.disabled = false;
     });
-
-    document.getElementById("nombreSorteo").value = "";
-    document.getElementById("horaSorteo").value = "";
-
-    for (var i = 0; i < diasSeleccionados.length; i++) {
-        diasSeleccionados[i].checked = false;
-    }
-
-    actualizarSorteos();
-
-    alert("Sorteo registrado correctamente");
 }
 
 function agregarJuego() {
@@ -138,14 +187,12 @@ function agregarJuego() {
         return;
     }
 
-    var indice = document.getElementById("sorteoJuego").value;
+    var sorteoId = document.getElementById("sorteoJuego").value;
 
-    if (indice == "") {
+    if (sorteoId == "") {
         alert("Seleccione un sorteo");
         return;
     }
-
-    var sorteo = sorteos[Number(indice)];
 
     var modalidad = document.getElementById("modalidad").value;
     var cantidad = Number(document.getElementById("cantidadNumeros").value);
@@ -198,21 +245,25 @@ function agregarJuego() {
         }
     }
 
-    juegos.push({
-        loteria: sorteo.loteria,
-        sorteo: sorteo.nombre,
+    var boton = document.querySelector("#seccion-modalidades button");
+    boton.disabled = true;
+    guardarRegistro({
+        accion: "juego",
+        sorteo_id: sorteoId,
         modalidad: modalidad,
         cantidad: cantidad,
         minimo: minimo,
         maximo: maximo,
-        montoMinimo: montoMinimo,
-        montoMaximo: montoMaximo,
+        monto_minimo: montoMinimo,
+        monto_maximo: montoMaximo,
         premios: premios
+    }).then(function (resultado) {
+        return cargarConfiguracion().then(function () { alert(resultado.mensaje); });
+    }).catch(function (error) {
+        alert(error.message);
+    }).finally(function () {
+        boton.disabled = false;
     });
-
-    actualizarJuegos();
-
-    alert("Modalidad configurada correctamente");
 }
 
 function actualizarJuegos() {
@@ -228,10 +279,10 @@ function actualizarJuegos() {
             juego.loteria + " | " +
             juego.sorteo + " | " +
             juego.modalidad +
-            " | Números: " + juego.cantidad +
-            " | Rango: " + juego.minimo + "-" + juego.maximo +
-            " | Apuesta: RD$" + juego.montoMinimo +
-            " a RD$" + juego.montoMaximo;
+            " | Números: " + juego.cantidad_numeros +
+            " | Rango: " + juego.numero_minimo + "-" + juego.numero_maximo +
+            " | Apuesta: RD$" + juego.monto_minimo +
+            " a RD$" + juego.monto_maximo;
 
         if (juego.premios.length > 0) {
 
@@ -257,12 +308,11 @@ function actualizarJuegos() {
     }
 }
 
-actualizarLoterias();
-actualizarSorteos();
+cargarConfiguracion();
 
 
 $(document).ready(function () {
-    $("#btnAgregarLoteria").on("click", async function () {
+    $("#btnAgregarLoteria").on("click", function () {
         const nombre = $("#nombreLoteria").val().trim();
 
         if (nombre === "") {
@@ -271,43 +321,8 @@ $(document).ready(function () {
             return;
         }
 
-        const boton = $(this);
-        boton.prop("disabled", true);
-
-        try {
-            const respuesta = await fetch("php/agregar_loteria.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ nombre: nombre })
-            });
-
-            const resultado = await respuesta.json();
-
-            if (!respuesta.ok || !resultado.ok) {
-                alert(resultado.mensaje || "No se pudo registrar la lotería.");
-                return;
-            }
-
-            // Evita duplicar el registro en la lista local.
-            if (!loterias.some(
-                nombreExistente =>
-                    nombreExistente.toLowerCase() === resultado.nombre.toLowerCase()
-            )) {
-                loterias.push(resultado.nombre);
-            }
-
-            $("#nombreLoteria").val("").removeClass("campo-error");
-            actualizarLoterias();
-            alert(resultado.mensaje);
-
-        } catch (error) {
-            console.error(error);
-            alert("No se pudo comunicar con el servidor PHP.");
-        } finally {
-            boton.prop("disabled", false);
-        }
+        agregarLoteria();
+        $("#nombreLoteria").removeClass("campo-error");
     });
 
     $("#nombreLoteria").on("input", function () {

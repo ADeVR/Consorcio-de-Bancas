@@ -1,132 +1,188 @@
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 25px;
-    background-color: #f4f4f4;
-    color: #333;
+/* Panel y widgets del módulo, construidos con la paleta compartida. */
+.config-overview {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid var(--color-borde);
+    border-top: 4px solid var(--color-acento-borde);
+    border-radius: 8px;
+    background: var(--color-fondo-tarjeta);
+    box-shadow: 0 2px 14px rgba(5, 66, 45, 0.1);
 }
 
-h1 {
-    color: #164b8b;
-}
-
-h2 {
-    color: #444;
-    margin-top: 25px;
-}
-
-input,
-select {
-    padding: 8px;
-    margin: 5px 0 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    max-width: 100%;
-}
-
-body > input,
-body > select {
-    display: block;
-    width: 300px;
-}
-
-label {
-    display: block;
-    margin-top: 8px;
-}
-
-button {
-    padding: 9px 14px;
-    background-color: #164b8b;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 0;
-}
-
-button:hover {
-    background-color: #0d3565;
-}
-
-ul {
-    background-color: white;
-    padding: 15px 35px;
-    border-radius: 5px;
-}
-
-li {
-    margin-bottom: 10px;
-}
-
-.fila {
+.config-overview-heading {
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
-.fila div {
-    min-width: 140px;
+.config-overview-heading h2 {
+    color: var(--color-verde-texto);
+    font-weight: 700;
 }
 
-.dias {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 12px;
+.config-eyebrow {
+    color: var(--color-foco-borde);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
 }
 
-.dias label {
+.config-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 999px;
+    color: var(--color-verde-texto);
+    background: var(--color-fondo-pagina);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.config-status span {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--color-acento-borde);
+    box-shadow: 0 0 0 3px rgba(49, 209, 113, 0.16);
+}
+
+.config-widgets {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.config-widget {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.85rem;
+    min-height: 78px;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    color: var(--color-texto-principal);
+    background: var(--color-fondo-pagina);
+    text-decoration: none;
+    transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out, transform 0.15s ease-in-out;
 }
 
-.dias input {
+.config-widget:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-acento-borde);
+    background: var(--color-hover-suave);
+    color: var(--color-verde-texto);
+}
+
+.config-widget:focus-visible {
+    outline: 3px solid var(--color-foco-visible);
+    outline-offset: 2px;
+}
+
+.widget-number {
+    display: grid;
+    width: 2.4rem;
+    height: 2.4rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 6px;
+    color: var(--color-verde-texto);
+    background: var(--estado-exito-fondo);
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.config-widget strong,
+.config-widget small {
+    display: block;
+}
+
+.config-widget strong {
+    color: var(--color-verde-texto);
+    font-size: 0.95rem;
+}
+
+.config-widget small {
+    margin-top: 0.15rem;
+    color: var(--color-texto-suave);
+    font-size: 0.78rem;
+}
+
+.widget-arrow {
+    margin-left: auto;
+    color: var(--color-foco-borde);
+    font-size: 1.2rem;
+}
+
+.config-card {
+    border: 1px solid var(--color-borde);
+    border-top: 3px solid var(--color-acento-borde);
+    background-color: var(--color-fondo-tarjeta);
+    scroll-margin-top: 1rem;
+    transition: box-shadow 0.15s ease-in-out;
+}
+
+.config-card:hover {
+    box-shadow: 0 0.5rem 1.25rem rgba(5, 66, 45, 0.1) !important;
+}
+
+.card-header {
+    color: var(--color-verde-texto);
+    border-bottom-color: var(--color-borde);
+}
+
+.card-header h2,
+.card-body h3 {
+    color: var(--color-verde-texto);
+}
+
+.dias .form-check {
     margin: 0;
 }
 
-hr {
-    margin-top: 30px;
-    border: 0;
-    border-top: 1px solid #ccc;
-}
-.campo-error {
-    border: 2px solid #dc3545;
-    background-color: #fff0f0;
+.dias .form-check-input {
+    margin-top: 0.25em;
 }
 
-/* Espaciado general */
-body {
-    min-height: 100vh;
-}
-
-/* Separación entre los elementos de las listas */
 #listaLoterias li,
 #listaSorteos li,
 #listaJuegos li {
     padding: 12px 16px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--color-borde);
     overflow-wrap: anywhere;
 }
 
-/* Evitar bordes innecesarios en el último elemento */
+#listaLoterias,
+#listaSorteos,
+#listaJuegos {
+    padding-left: 2.75rem;
+}
+
 #listaLoterias li:last-child,
 #listaSorteos li:last-child,
 #listaJuegos li:last-child {
-    border-bottom: none;
+    border-bottom: 0;
 }
 
-/* Campo marcado por la validación de jQuery */
 .campo-error {
-    border: 2px solid #dc3545 !important;
-    background-color: #fff0f0;
+    border: 2px solid var(--error-borde) !important;
+    background-color: var(--error-fondo);
 }
 
-/* Transición suave de los campos */
 .form-control,
 .form-select {
-    transition: border-color 0.15s ease-in-out,
-                box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (max-width: 767.98px) {
+    .config-overview-heading {
+        flex-direction: column;
+    }
+
+    .config-widgets {
+        grid-template-columns: 1fr;
+    }
 }
