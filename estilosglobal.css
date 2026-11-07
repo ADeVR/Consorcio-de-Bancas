@@ -377,7 +377,7 @@ code {
   .table, .tabla-datos { font-size: 16px; }
   .btn-pagar, .btn-principal, .btn-pagado, .btn-secundario, .btn-peligro { font-size: 17px; }
 
-  /* ---- Barra superior ---- */
+/* ---- Barra superior ---- */
 .barra-superior {
   display: flex;
   flex-wrap: wrap;
@@ -392,7 +392,7 @@ code {
 .barra-superior-titulo {
   font-weight: 700;
   font-size: 1.25rem;
-  color: var(--color-verde-texto);
+  color: var(--color-texto-principal);
 }
 
 .barra-superior-acciones {
@@ -407,28 +407,5 @@ code {
 .barra-superior-usuario {
   color: var(--color-texto-principal);
   margin-right: 4px;
-}
-
-/* ---- Botones de la barra ---- */
-.barra-superior .btn-secundario {
-  height: 34px;
-  padding: 0 0.85rem;
-  font-size: 1rem;
-  text-decoration: none;
-}
-
-/* ---- Pantallas pequeñas ---- */
-@media (max-width: 576px) {
-  .barra-superior {
-    justify-content: center;
-    text-align: center;
-  }
-  .barra-superior-acciones {
-    justify-content: center;
-    margin-left: 0;
-  }
-  .barra-superior .btn-secundario {
-    font-size: 0.9rem;
-  }
 }
 }
