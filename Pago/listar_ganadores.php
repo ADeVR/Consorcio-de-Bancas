@@ -16,7 +16,7 @@ $sql = "
         GROUP_CONCAT(DISTINCT s.nombre    SEPARATOR ', ') AS sorteo,
         SUM(d.monto * pj.valor_por_peso)                  AS premio,
         COALESCE(p.estado, 'pendiente')                   AS estado
-   FROM numero_ganador_prueba g
+   FROM numero_ganador g
     JOIN jugada_detalle d ON d.id_detalle = g.id_detalle
     JOIN ticket t         ON t.id_ticket  = d.id_ticket
     JOIN juegos j         ON j.id         = d.id_tipo
