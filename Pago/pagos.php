@@ -36,6 +36,7 @@ exigirPermisoModulo("Pagos");
                 <input type="hidden" name="token_csrf" value="<?= escapar(tokenCsrf()) ?>">
                 <button type="submit" class="btn btn-outline-secondary btn-sm">Cerrar sesión</button>
             </form>
+        </div>
     </div>
     <!-- fin de la barra superior del módulo -->
     <header class="masthead">
