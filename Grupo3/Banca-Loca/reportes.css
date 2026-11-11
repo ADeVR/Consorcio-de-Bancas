@@ -1,0 +1,456 @@
+
+/* =====================================================
+   SISTEMA BANCA LOCA
+   CENTRO DE REPORTES
+   Diseño profesional
+   ===================================================== */
+
+/* CONFIGURACIÓN GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f6fa;
+    color: #263449;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.reportes-container {
+    max-width: 1550px;
+    margin: auto;
+    padding: 30px;
+}
+
+/* =====================================================
+   ENCABEZADO
+   ===================================================== */
+
+.reportes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.reportes-header h1 {
+    font-size: 27px;
+    font-weight: 700;
+    color: #04f77d;
+    margin-bottom: 7px;
+}
+
+.reportes-header p {
+    color: #8290a3;
+    font-size: 14px;
+    margin: 0;
+}
+
+.header-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e7efff;
+    color: #2861bc;
+    font-size: 25px;
+    border-radius: 12px;
+}
+
+/* =====================================================
+   PANEL DE BIENVENIDA
+   ===================================================== */
+
+.welcome-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(110deg, #183d73, #2865b3);
+    color: #ffffff;
+    padding: 32px;
+    border-radius: 14px;
+    margin-bottom: 36px;
+    min-height: 180px;
+}
+
+.welcome-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #c9dcfa;
+}
+
+.welcome-panel h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 12px 0;
+}
+
+.welcome-panel p {
+    max-width: 650px;
+    color: #e1eaf8;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.welcome-icon {
+    font-size: 75px;
+    color: rgba(255, 255, 255, .30);
+    margin-right: 20px;
+}
+
+/* =====================================================
+   SECCIÓN DE MÓDULOS
+   ===================================================== */
+
+.modules-section {
+    margin-bottom: 35px;
+}
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #263449;
+    margin-bottom: 6px;
+}
+
+.section-heading p {
+    color: #8793a5;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* =====================================================
+   TARJETAS DE REPORTES
+   ===================================================== */
+
+.report-card {
+    background: #ffffff;
+    border: 1px solid #e7ebf1;
+    border-radius: 13px;
+    padding: 23px;
+    min-height: 220px;
+    height: 100%;
+    transition: transform .2s ease,
+                box-shadow .2s ease;
+}
+
+.report-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 24px rgba(31, 55, 90, .08);
+}
+
+.report-card h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #26364d;
+    margin-bottom: 10px;
+}
+
+.report-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #8290a3;
+    margin-bottom: 17px;
+}
+
+/* =====================================================
+   ICONOS
+   ===================================================== */
+
+.report-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    border-radius: 11px;
+    margin-bottom: 19px;
+}
+
+.icon-blue {
+    background: #e8efff;
+    color: #2861bc;
+}
+
+.icon-green {
+    background: #e5f6ed;
+    color: #198754;
+}
+
+.icon-orange {
+    background: #fff1e2;
+    color: #d77a18;
+}
+
+.icon-purple {
+    background: #f1eaff;
+    color: #7950c5;
+}
+
+.icon-red {
+    background: #ffe9e9;
+    color: #d34a4a;
+}
+
+.icon-dark {
+    background: #e9edf3;
+    color: #53647b;
+}
+
+/* =====================================================
+   ESTADO DE LOS MÓDULOS
+   ===================================================== */
+
+.report-status {
+    display: inline-block;
+    background: #fff6df;
+    color: #98762f;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* =====================================================
+   PIE DE PÁGINA
+   ===================================================== */
+
+.reportes-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-top: 1px solid #e2e7ef;
+    padding-top: 20px;
+    margin-top: 40px;
+    color: #8b96a7;
+    font-size: 12px;
+}
+
+/* =====================================================
+   DISEÑO RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+    .reportes-container {
+        padding: 18px;
+    }
+
+    .reportes-header h1 {
+        font-size: 22px;
+    }
+
+    .welcome-panel {
+        padding: 23px;
+    }
+
+    .welcome-panel h2 {
+        font-size: 22px;
+    }
+
+    .welcome-icon {
+        font-size: 50px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .header-icon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .welcome-icon {
+        display: none;
+    }
+
+    .reportes-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+/* ======================================================
+   REPORTE DE SORTEOS
+   ====================================================== */
+
+.report-container {
+    padding: 30px;
+    color: #263445;
+}
+
+.report-container .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.report-container .page-header h2 {
+    font-weight: 750;
+    margin-bottom: 6px;
+}
+
+.report-container .page-header p {
+    color: #718096;
+    margin: 0;
+}
+
+.report-container .summary-card,
+.report-container .filter-card,
+.report-container .table-card {
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.05);
+}
+
+.report-container .summary-card {
+    height: 100%;
+}
+
+.report-container .summary-card .card-body {
+    padding: 23px;
+}
+
+.report-container .summary-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #778397;
+    letter-spacing: .5px;
+}
+
+.report-container .summary-number {
+    font-size: 27px;
+    font-weight: 750;
+    margin: 8px 0 0;
+}
+
+.report-container .summary-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.report-container .filter-card .card-header,
+.report-container .table-card .card-header {
+    background: #fff;
+    padding: 20px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.report-container .form-label {
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.report-container .table thead th {
+    background: #f7f9fc;
+    color: #64748b;
+    font-size: 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 15px;
+}
+
+.report-container .table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.report-container .sorteo-name {
+    font-weight: 700;
+    color: #263c63;
+}
+
+.report-container .empty-state {
+    padding: 55px 20px;
+    text-align: center;
+    color: #8793a5;
+}
+
+.report-container .empty-state i {
+    font-size: 45px;
+}
+
+.report-container footer {
+    color: #8993a2;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+@media print {
+    .report-container .no-print {
+        display: none !important;
+    }
+
+    .report-container .summary-card,
+    .report-container .table-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+@media (max-width: 768px) {
+    .report-container {
+        padding: 15px;
+    }
+
+    .report-container .summary-number {
+        font-size: 23px;
+    }
+}
+/* =========================================
+   CABECERA VERDE - BANCA LOCA
+   ========================================= */
+
+.reportes-header {
+    background: linear-gradient(135deg, #14532d, #16a34a) !important;
+    color: #ffffff !important;
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.reportes-header h1,
+.reportes-header p {
+    color: #ffffff !important;
+}
+
+.reportes-header .header-icon {
+    color: #ffffff !important;
+}
+
+/* Panel de bienvenida */
+
+.welcome-panel {
+    background: linear-gradient(135deg, #166534, #22a06b) !important;
+    color: #ffffff !important;
+}
+
+.welcome-panel h2,
+.welcome-panel p,
+.welcome-panel .welcome-label,
+.welcome-panel .welcome-icon {
+    color: #ffffff !important;
+}
