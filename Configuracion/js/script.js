@@ -334,3 +334,32 @@ $(document).ready(function () {
     });
 });
 
+// Exportar configuración JSON
+document
+    .getElementById("btnExportarJson")
+    .addEventListener("click", exportarConfiguracionJson);
+
+async function exportarConfiguracionJson() {
+    try {
+        const respuesta = await fetch("php/api.php");
+        const datos = await leerRespuestaJson(respuesta);
+
+        if (!respuesta.ok || !datos.ok) {
+            throw new Error(datos.mensaje || "No se pudo exportar la configuración.");
+        }
+
+        const contenido = JSON.stringify(datos, null, 2);
+        const archivo = new Blob([contenido], {
+            type: "application/json;charset=utf-8"
+        });
+
+        const enlaceTemporal = document.createElement("a");
+        enlaceTemporal.href = URL.createObjectURL(archivo);
+        enlaceTemporal.download = "configuracion-loterias.json";
+        enlaceTemporal.click();
+
+        URL.revokeObjectURL(enlaceTemporal.href);
+    } catch (error) {
+        alert(error.message || "No se pudo exportar la configuración.");
+    }
+}
