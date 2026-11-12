@@ -34,7 +34,7 @@ $modulos = [
     "Caja y Reportes" => [
         "nombre" => "Caja y Reportes",
         "descripcion" => "Acceder al módulo de Caja y Reportes.",
-        "ruta" => "/ConsorcioDeBancas/Grupo3/public/index.php",
+        "ruta" => "/ConsorcioDeBancas/Grupo3/Banca-Loca/reportes.php",
         "icon" => "bi-cash-stack"
     ],
 
