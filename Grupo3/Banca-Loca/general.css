@@ -1,0 +1,111 @@
+
+/* ==========================================================
+   ESTILOS DEL REPORTE GENERAL
+   Sistema Banca Loca
+   ========================================================== */
+
+/* TARJETAS */
+
+.general-card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: #ffffff;
+}
+
+.general-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09) !important;
+}
+
+/* TÍTULOS DE TARJETAS */
+
+.general-title {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* VALORES */
+
+.general-value {
+    font-size: 1.45rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* ICONOS */
+
+.general-icon {
+    font-size: 2.2rem;
+    opacity: 0.85;
+}
+
+/* ENCABEZADOS DE SECCIÓN */
+
+.general-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* FILTROS */
+
+.general-filter {
+    border: none;
+    border-radius: 12px;
+}
+
+/* BOTONES */
+
+.general-button {
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* INFORMACIÓN DEL PERÍODO */
+
+.general-period {
+    border: none;
+    border-radius: 12px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .general-value {
+        font-size: 1.2rem;
+    }
+
+    .general-icon {
+        font-size: 1.8rem;
+    }
+
+}
+
+/* IMPRESIÓN */
+
+@media print {
+
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+    }
+
+    .general-card {
+        box-shadow: none !important;
+        border: 1px solid #dddddd !important;
+        break-inside: avoid;
+    }
+
+    .container-fluid {
+        padding: 10px !important;
+    }
+
+}

@@ -1,0 +1,4 @@
+# Activar auditoría automática en instalaciones Apache con PHP como módulo.
+<IfModule php_module>
+    php_value auto_prepend_file "C:/Users/Aderson Valdez/Desktop/UASD/2026-02/Lab Programacion III/Consorcio de Bancas/Seguridad/php/auditoria_prepend.php"
+</IfModule>

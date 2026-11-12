@@ -26,7 +26,7 @@ exigirPermisoModulo("Pagos");
         <div class="barra-superior-acciones">
            <span class="barra-superior-usuario">Módulo 6 - Pagos | <?= escapar($_SESSION["usuario"] ?? "") ?></span>
 
-            <a class="btn btn-outline-secondary btn-sm" href="/ConsorcioDeBancas/Seguridad/php/inicio.php">Panel</a>
+             <a class="btn btn-outline-secondary btn-sm" href="/ConsorcioDeBancas/Seguridad/php/inicio.php">Panel</a>
 
             <?php if (tienePermisoModulo($conexion, "Jugar")): ?>
                 <a class="btn btn-outline-secondary btn-sm" href="/ConsorcioDeBancas/Jugar/">Jugar</a>
