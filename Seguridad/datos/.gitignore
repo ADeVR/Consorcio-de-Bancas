@@ -1,3 +1,4 @@
 # Configuración privada de correo: NO subir a GitHub
 correo_config.json
 alertas_enviadas.json
+/Seguridad/php/.htaccess
