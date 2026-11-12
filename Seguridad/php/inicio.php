@@ -108,6 +108,13 @@ $token = tokenCsrf();
                         <i class="bi bi-gear-fill"></i>
                     </a>
                 <?php endif; ?>
+                <?php if ($rol === "admin"): ?>
+                    <a class="btn btn-outline-success"
+                        href="<?= escapar($baseSeguridad) ?>/php/auditoria.php">
+                        <i class="bi bi-clipboard-data me-1"></i>
+                        Auditoría
+                    </a>
+                <?php endif; ?>
                 <form action="<?= escapar($baseSeguridad) ?>/php/cerrar_sesion.php" method="post">
                     <input type="hidden" name="token_csrf" value="<?= escapar($token) ?>">
                     <button class="btn btn-outline-secondary" type="submit">
