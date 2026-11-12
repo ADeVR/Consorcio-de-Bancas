@@ -217,7 +217,8 @@ def main() -> int:
     )
     parser.add_argument("--entrada", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--salida", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--umbral", type=int, default=5)
+    
+    parser.add_argument("--umbral", type=int, default=2)
     parser.add_argument("--ventana", type=int, default=10)
     args = parser.parse_args()
 

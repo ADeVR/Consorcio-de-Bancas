@@ -34,7 +34,7 @@ $modulos = [
     "Caja y Reportes" => [
         "nombre" => "Caja y Reportes",
         "descripcion" => "Acceder al módulo de Caja y Reportes.",
-        "ruta" => "/ConsorcioDeBancas/Grupo3/public/index.php",
+        "ruta" => "/ConsorcioDeBancas/Grupo3/Banca-Loca/reportes.php",
         "icon" => "bi-cash-stack"
     ],
 
@@ -106,6 +106,13 @@ $token = tokenCsrf();
                         title="Configuración"
                         aria-label="Configuración">
                         <i class="bi bi-gear-fill"></i>
+                    </a>
+                <?php endif; ?>
+                <?php if ($rol === "admin"): ?>
+                    <a class="btn btn-outline-success"
+                        href="<?= escapar($baseSeguridad) ?>/php/auditoria.php">
+                        <i class="bi bi-clipboard-data me-1"></i>
+                        Auditoría
                     </a>
                 <?php endif; ?>
                 <form action="<?= escapar($baseSeguridad) ?>/php/cerrar_sesion.php" method="post">

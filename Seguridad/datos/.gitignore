@@ -1,3 +1,13 @@
-# Configuración privada de correo: NO subir a GitHub
-correo_config.json
-alertas_enviadas.json
+
+# Configuración local de Apache
+/Seguridad/php/.htaccess
+
+# Credenciales privadas de correo
+/Seguridad/datos/correo_config.json
+
+# Registros y resultados generados localmente
+/Seguridad/datos/auditoria.jsonl
+/Seguridad/datos/alertas_enviadas.json
+/Seguridad/datos/resumen_auditoria.json
+/Seguridad/datos/ejecuciones_analizador.log
+

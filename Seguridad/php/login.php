@@ -16,6 +16,9 @@ $mensaje = "";
 // Procesar el formulario.
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
+    // Por defecto, no es un intento fallido de credenciales.
+    $_SESSION["auditar_intento_fallido"] = false;
+
     // Verificar el token de seguridad.
     if (!csrfValido()) {
 
@@ -55,20 +58,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["token_csrf"] = bin2hex(random_bytes(32));
 
             // Redirigir según el rol.
-            if ($usuario["rol"] === "admin") {
-
-                header(
-                    "Location: " . $rutaBase . "/php/inicio.php"
-                );
-            } else {
-
-                header(
-                    "Location: " . $rutaBase . "/php/inicio.php"
-                );
-            }
-
+            header("Location: " . $rutaBase . "/php/inicio.php");
             exit;
         } else {
+
+            // Marcar el intento fallido para la auditoría.
+            $_SESSION["auditar_intento_fallido"] = true;
 
             $mensaje = "Usuario o contraseña incorrectos, o cuenta inactiva.";
         }
