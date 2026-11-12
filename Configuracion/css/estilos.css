@@ -167,6 +167,36 @@
     border-bottom: 0;
 }
 
+#listaSorteos,
+#listaJuegos {
+    list-style: none;
+    padding-left: 0;
+}
+
+#listaSorteos li,
+#listaJuegos li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+#listaSorteos li:last-child,
+#listaJuegos li:last-child {
+    border-bottom: 0;
+}
+.dato-listado {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 11px;
+    border: 1px solid var(--color-borde);
+    border-radius: 7px;
+    background-color: #eef8f1;
+    color: var(--color-verde-texto);
+    font-size: 0.92rem;
+}
 .campo-error {
     border: 2px solid var(--error-borde) !important;
     background-color: var(--error-fondo);

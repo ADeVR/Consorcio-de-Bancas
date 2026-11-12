@@ -87,11 +87,19 @@ function actualizarSorteos() {
         selector.appendChild(opcion);
 
         var elemento = document.createElement("li");
-        elemento.textContent =
-            sorteo.loteria + " | " +
-            sorteo.nombre + " | " +
-            sorteo.hora + " | " +
-            (sorteo.dias || []).join(", ");
+        var datosSorteo = [
+            sorteo.loteria,
+            sorteo.nombre,
+            sorteo.hora,
+            (sorteo.dias || []).join(", ")
+        ];
+
+        for (var d = 0; d < datosSorteo.length; d++) {
+            var dato = document.createElement("span");
+            dato.className = "dato-listado";
+            dato.textContent = datosSorteo[d];
+            elemento.appendChild(dato);
+        }
 
         lista.appendChild(elemento);
     }
@@ -275,35 +283,34 @@ function actualizarJuegos() {
 
         var juego = juegos[i];
 
-        var texto =
-            juego.loteria + " | " +
-            juego.sorteo + " | " +
-            juego.modalidad +
-            " | Números: " + juego.cantidad_numeros +
-            " | Rango: " + juego.numero_minimo + "-" + juego.numero_maximo +
-            " | Apuesta: RD$" + juego.monto_minimo +
-            " a RD$" + juego.monto_maximo;
+        var datosJuego = [
+            juego.loteria,
+            juego.sorteo,
+            juego.modalidad,
+            "Números: " + juego.cantidad_numeros,
+            "Rango: " + juego.numero_minimo + "-" + juego.numero_maximo,
+            "Apuesta: RD$" + juego.monto_minimo + " a RD$" + juego.monto_maximo
+        ];
 
         if (juego.premios.length > 0) {
-
-            texto += " | Premios por RD$1: ";
-
             for (var j = 0; j < juego.premios.length; j++) {
-
-                texto += juego.premios[j].nombre +
-                    " RD$" + juego.premios[j].valor;
-
-                if (j < juego.premios.length - 1) {
-                    texto += ", ";
-                }
+                datosJuego.push(
+                    juego.premios[j].nombre + " RD$" + juego.premios[j].valor
+                );
             }
-
         } else {
-            texto += " | Premios: Por configurar";
+            datosJuego.push("Premios: Por configurar");
         }
 
         var elemento = document.createElement("li");
-        elemento.textContent = texto;
+
+        for (var d = 0; d < datosJuego.length; d++) {
+            var dato = document.createElement("span");
+            dato.className = "dato-listado";
+            dato.textContent = datosJuego[d];
+            elemento.appendChild(dato);
+        }
+
         lista.appendChild(elemento);
     }
 }
