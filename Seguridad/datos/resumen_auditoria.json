@@ -1,0 +1,50 @@
+{
+    "generado_en": "2026-11-11T22:42:39-04:00",
+    "fuente": "auditoria.jsonl",
+    "total_eventos": 74,
+    "eventos_por_tipo": {
+        "ACCESO_PAGINA": 39,
+        "CAMBIO_PERMISOS": 1,
+        "CIERRE_SESION": 8,
+        "INICIO_SESION": 8,
+        "INTENTO_INICIO_SESION": 18
+    },
+    "eventos_por_estado": {
+        "EXITOSO": 8,
+        "NO_AUTENTICADO": 18,
+        "REGISTRADO": 40,
+        "SOLICITADO": 8
+    },
+    "actividad_por_usuario": {
+        "ADev": 54,
+        "ADevb": 1
+    },
+    "intentos_fallidos_identificados": 17,
+    "alertas": [
+        {
+            "id_alerta": "0b48a629dc499b96851d53710cf702618d6df47a517c5918da55f7215f4ad4c0",
+            "tipo": "POSIBLES_INTENTOS_REPETIDOS",
+            "usuario": "ADev",
+            "intentos_fallidos": 5,
+            "ventana_minutos": 10,
+            "desde": "2026-11-12T03:18:11+01:00",
+            "hasta": "2026-11-12T03:21:49+01:00",
+            "recomendacion": "Revisar los intentos de acceso de esta cuenta. La alerta no confirma por sí sola un ataque."
+        },
+        {
+            "id_alerta": "116555b771cdf4c6fc9792f5383af5e83f1882bd5d505d2b58ff120a0df4d831",
+            "tipo": "POSIBLES_INTENTOS_REPETIDOS",
+            "usuario": "ADev",
+            "intentos_fallidos": 5,
+            "ventana_minutos": 10,
+            "desde": "2026-11-12T03:40:27+01:00",
+            "hasta": "2026-11-12T03:40:53+01:00",
+            "recomendacion": "Revisar los intentos de acceso de esta cuenta. La alerta no confirma por sí sola un ataque."
+        }
+    ],
+    "periodo_registrado": {
+        "desde": "2026-11-12T03:05:06+01:00",
+        "hasta": "2026-11-12T03:41:15+01:00"
+    },
+    "lineas_invalidas_omitidas": 0
+}
