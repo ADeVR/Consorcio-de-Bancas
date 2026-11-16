@@ -32,3 +32,18 @@
   color: #1E2A24;
   margin-right: 4px;
 }
+@media print {
+  .barra-superior,
+  .masthead,
+  .ticket-title,
+  .ticket section:first-of-type,
+  .ticket section h2,
+  #btn-imprimir { display: none !important; }
+
+  body { background: #fff; }
+  .ticket { box-shadow: none; margin: 0; max-width: none; }
+  .ticket section { border: 0 !important; padding: 0; }
+  .ticket section::before,
+  .ticket section::after { display: none !important; }
+  .comprobante-box { border: 0; padding: 0; }
+}

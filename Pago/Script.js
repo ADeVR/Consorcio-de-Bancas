@@ -49,28 +49,22 @@ $(document).ready(function () {
 
     });
 
-    // Estado reclamación
-
-    $("#estado-reclamacion").on("change", function () {
-
-        let estado = $(this).val();
+    // Mensaje de la Pantalla
 
         if (estado === "pendiente") {
-            $("#resultado-reclamacion").text("El premio se encuentra pendiente.");
+            $("#mensaje-pantalla").text("El premio se encuentra pendiente.");
         }
         else if (estado === "reclamado") {
-            $("#resultado-reclamacion").text("El premio ha sido reclamado.");
+            $("#mensaje-pantalla").text("El premio ha sido reclamado.");
         }
         else if (estado === "pagado") {
-            $("#resultado-reclamacion").text("El premio ha sido pagado.");
+            $("#mensaje-pantalla").text("El premio ha sido pagado.");
         }
         else {
-            $("#resultado-reclamacion").text("");
+            $("#mensaje-pantalla").text("");
         }
 
     });
-
-});
 
 // CARGAR BOLETOS GANADORES DESDE LA BASE
 
@@ -201,8 +195,7 @@ $(document).on("click", ".btn-pagar", function () {
             boleto.estado = "pagado";
             boleto.premio = resp.premio;
 
-            $("#estado-reclamacion").val("pagado");
-            $("#resultado-reclamacion").text("El premio ha sido pagado.");
+            $("#mensaje-pantalla").text("El premio ha sido pagado.");
 
             $("#comprobante").html(`
                 <h3>Comprobante de Pago</h3>
@@ -222,11 +215,11 @@ $(document).on("click", ".btn-pagar", function () {
                 <p><strong>Estado:</strong> Pagado</p>
                 <p><strong>Fecha y hora:</strong> ${esc(resp.fecha.split("-").reverse().join("/"))} ${esc(resp.hora)}</p>
                 <p><strong>Atendido por:</strong> ${esc(resp.cajero)}</p>
-
+                
             `);
 
             mostrarBoletos(boletos);
-
+            $("#btn-imprimir").prop("hidden", false);
         },
 
         error: function (xhr) {
@@ -241,9 +234,13 @@ $(document).on("click", ".btn-pagar", function () {
             boton.prop("disabled", false);
 
         }
+    }); 
 
-    });
+});
 
+// Imprimir o guardar el comprobante como PDF
+$(document).on("click", "#btn-imprimir", function () {
+    window.print();
 });
 
 // Mostrar el campo de cuenta solo si elige transferencia

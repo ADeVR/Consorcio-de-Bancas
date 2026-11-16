@@ -78,14 +78,14 @@ exigirPermisoModulo("Pagos");
                 </table>
             </div>
 
-            <p id="resultado-reclamacion" class="resultado"></p>
+            <p id="mensaje-pantalla" class="resultado"></p>
         </section>
 
         <section>
             <h2>Comprobante</h2>
             <div id="comprobante" class="comprobante-box"></div>
+            <button type="button" id="btn-imprimir" class="btn btn-outline-secondary mt-2" hidden>Imprimir comprobante</button>
         </section>
-
         
     </div>
 
