@@ -17,4 +17,14 @@ $sql .= " ORDER BY s.id_solicitud DESC LIMIT 100";
 
 $st = $pdo->prepare($sql);
 $st->execute($params);
-echo json_encode($st->fetchAll());
+$lista = $st->fetchAll();
+
+// NUEVO: avisar al JavaScript cuáles solicitudes puede resolver este usuario
+// (solo el admin, y solo las que siguen pendientes)
+$esAdmin = ($_SESSION['rol'] === 'admin');
+foreach ($lista as &$s) {
+    $s['puede_resolver'] = $esAdmin && $s['estado'] === 'pendiente';
+}
+unset($s);
+
+echo json_encode($lista);

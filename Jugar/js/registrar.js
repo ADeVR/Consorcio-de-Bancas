@@ -1,10 +1,11 @@
+(() => {
 const selSorteo = document.getElementById("sorteo");
 const selJuego = document.getElementById("juego");
 const contNumeros = document.getElementById("numeros");
 const ayudaNum = document.getElementById("ayudaNumeros");
 const inputMonto = document.getElementById("monto");
 const ayudaMonto = document.getElementById("ayudaMonto");
-const mensaje = document.getElementById("mensaje");
+const mensaje = document.getElementById("mensajeRegistro");
 const tbody = document.getElementById("listaJugadas");
 const totalEl = document.getElementById("total");
 
@@ -264,6 +265,8 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
             " registrado. Total: RD$ " +
             Number(res.total).toFixed(2),
         );
+        // NUEVO: imprimir el ticket automáticamente
+        imprimirTicket(res.codigo);
       } else {
         mostrarMensaje("danger", res.error);
       }
@@ -275,3 +278,4 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
       btn.disabled = false;
     });
 });
+})();

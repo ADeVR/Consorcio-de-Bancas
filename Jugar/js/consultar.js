@@ -1,8 +1,9 @@
+(() => {
 const inpFecha = document.getElementById("fecha");
-const inpCodigo = document.getElementById("codigo");
+const inpCodigo = document.getElementById("codigoConsulta");
 const tbody = document.getElementById("listaTickets");
 const resumen = document.getElementById("resumen");
-const mensaje = document.getElementById("mensaje");
+const mensaje = document.getElementById("mensajeConsulta");
 
 function crear(tag, texto, clase) {
   const e = document.createElement(tag);
@@ -91,6 +92,12 @@ function dibujar(tickets) {
     btn.type = "button";
     const tdBtn = crear("td");
     tdBtn.appendChild(btn);
+
+    // NUEVO: botón para volver a imprimir el ticket
+    const btnImprimir = crear("button", "Imprimir", "btn btn-sm btn-outline-primary ms-1");
+    btnImprimir.type = "button";
+    btnImprimir.addEventListener("click", () => imprimirTicket(t.codigo_ticket));
+    tdBtn.appendChild(btnImprimir);
     tr.appendChild(tdBtn);
     tbody.appendChild(tr);
 
@@ -139,3 +146,4 @@ function cargar() {
 
 document.getElementById("btnBuscar").addEventListener("click", cargar);
 cargar();
+})();
