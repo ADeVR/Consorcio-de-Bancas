@@ -265,6 +265,8 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
             " registrado. Total: RD$ " +
             Number(res.total).toFixed(2),
         );
+        // NUEVO: imprimir el ticket automáticamente
+        imprimirTicket(res.codigo);
       } else {
         mostrarMensaje("danger", res.error);
       }
@@ -276,4 +278,4 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
       btn.disabled = false;
     });
 });
-})();
+})();

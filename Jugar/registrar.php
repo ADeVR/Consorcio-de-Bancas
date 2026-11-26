@@ -386,6 +386,7 @@ function mostrarSeccion(seccion) {
 }
 </script>
 
+<script src="js/imprimir.js"></script>
 <script src="js/registrar.js"></script>
 <script src="js/consultar.js"></script>
 <script src="js/anulacion.js"></script>
