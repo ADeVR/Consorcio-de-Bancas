@@ -94,7 +94,7 @@ function dibujar(tickets) {
     tdBtn.appendChild(btn);
 
     // NUEVO: botón para volver a imprimir el ticket
-    const btnImprimir = crear("button", "Imprimir", "btn btn-sm btn-outline-primary ms-1");
+    const btnImprimir = crear("button", "Imprimir", "btn btn-sm btn-outline-success ms-1");
     btnImprimir.type = "button";
     btnImprimir.addEventListener("click", () => imprimirTicket(t.codigo_ticket));
     tdBtn.appendChild(btnImprimir);
@@ -146,4 +146,4 @@ function cargar() {
 
 document.getElementById("btnBuscar").addEventListener("click", cargar);
 cargar();
-})();
+})();

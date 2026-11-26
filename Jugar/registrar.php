@@ -1,4 +1,3 @@
-
 <?php require __DIR__ . '/includes/header.php'; ?>
 
 <style>
@@ -51,9 +50,9 @@
 }
 
 .panel-tab.active {
-    background: #285da8;
+    background: var(--color-marco-fondo);
     color: white;
-    border-color: #285da8;
+    border-color: var(--color-marco-fondo);
 }
 
 /* DESKTOP: make room for the panel */
@@ -83,13 +82,13 @@
 
         <div>
             <button type="button"
-                    class="btn btn-outline-primary"
+                    class="btn btn-secundario"
                     onclick="abrirPanel('consultar')">
                 Consultar jugadas
             </button>
 
             <button type="button"
-                    class="btn btn-primary"
+                    class="btn btn-secundario"
                     onclick="abrirPanel('anulaciones')">
                 Anulaciones
             </button>
@@ -143,7 +142,7 @@
 
             </div>
 
-            <button type="button" class="btn btn-primary"
+            <button type="button" class="btn btn-secundario"
                     id="btnAgregar">
                 + Agregar al ticket
             </button>
@@ -183,12 +182,12 @@
                 </table>
             </div>
 
-            <button type="button" class="btn btn-success"
+            <button type="button" class="btn btn-principal"
                     id="btnGuardar">
                 Registrar ticket
             </button>
 
-            <a href="index.php" class="btn btn-secondary">
+            <a href="index.php" class="btn btn-secundario">
                 Volver al menú
             </a>
 
@@ -218,7 +217,7 @@
                 </button>
             </div>
 
-            <button type="button" class="btn btn-light"
+            <button type="button" class="btn btn-secundario"
                     onclick="cerrarPanel()">
                 &times; Cerrar
             </button>
@@ -253,7 +252,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary"
+                    <button type="button" class="btn btn-principal"
                             id="btnBuscar">
                         Buscar
                     </button>
@@ -320,7 +319,7 @@
                     </div>
 
                     <button type="button"
-                            class="btn btn-danger w-100"
+                            class="btn btn-peligro w-100"
                             id="btnEnviar">
                         Enviar solicitud
                     </button>

@@ -56,13 +56,16 @@ function e($texto) {
         padding: 4mm 0;
         font-family: "Courier New", monospace;
         font-size: 12px;
+        line-height: 1.5;
         color: #000;
     }
     .centro  { text-align: center; }
     .grande  { font-size: 16px; font-weight: bold; }
-    .linea   { border-top: 1px dashed #000; margin: 6px 0; }
+    .linea   { border-top: 1px dashed #000; margin: 10px 0; }
     .fila    { display: flex; justify-content: space-between; }
     .anulado { font-size: 18px; font-weight: bold; border: 2px solid #000; padding: 4px; }
+    .jugada  { margin-bottom: 8px; } 
+
 </style>
 </head>
 <body>
@@ -84,10 +87,12 @@ function e($texto) {
     <div class="linea"></div>
 
     <?php foreach ($jugadas as $j): ?>
-        <div><?= e($j['loteria'] . ' - ' . $j['sorteo']) ?></div>
-        <div class="fila">
-            <span><?= e($j['modalidad']) ?>: <b><?= e($j['numeros']) ?></b></span>
-            <span>RD$ <?= e(number_format($j['monto'], 2)) ?></span>
+        <div class="jugada">            
+            <div><?= e($j['loteria'] . ' - ' . $j['sorteo']) ?></div>
+            <div class="fila">
+                <span><?= e($j['modalidad']) ?>: <b><?= e($j['numeros']) ?></b></span>
+                <span>RD$ <?= e(number_format($j['monto'], 2)) ?></span>
+            </div>
         </div>
     <?php endforeach; ?>
 
