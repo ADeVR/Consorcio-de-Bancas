@@ -1,7 +1,8 @@
-const inpCodigo = document.getElementById("codigo");
+(() => {
+const inpCodigo = document.getElementById("codigoAnulacion");
 const inpMotivo = document.getElementById("motivo");
 const contador = document.getElementById("contador");
-const mensaje = document.getElementById("mensaje");
+const mensaje = document.getElementById("mensajeAnulacion");
 const tbody = document.getElementById("listaSolicitudes");
 const btnEnviar = document.getElementById("btnEnviar");
 
@@ -108,3 +109,4 @@ btnEnviar.addEventListener("click", () => {
 });
 
 cargar();
+})();

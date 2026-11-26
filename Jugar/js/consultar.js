@@ -1,8 +1,9 @@
+(() => {
 const inpFecha = document.getElementById("fecha");
-const inpCodigo = document.getElementById("codigo");
+const inpCodigo = document.getElementById("codigoConsulta");
 const tbody = document.getElementById("listaTickets");
 const resumen = document.getElementById("resumen");
-const mensaje = document.getElementById("mensaje");
+const mensaje = document.getElementById("mensajeConsulta");
 
 function crear(tag, texto, clase) {
   const e = document.createElement(tag);
@@ -139,3 +140,4 @@ function cargar() {
 
 document.getElementById("btnBuscar").addEventListener("click", cargar);
 cargar();
+})();
