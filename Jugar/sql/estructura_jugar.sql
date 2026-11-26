@@ -186,6 +186,10 @@ ALTER TABLE `ticket`
   ADD CONSTRAINT `fk_ticket_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
+-- Cambio 2026-11-26 (Módulo 4): fecha en que el admin resolvió la solicitud
+ALTER TABLE solicitud_anulacion
+  ADD fecha_revision DATETIME NULL AFTER id_usuario_revisa;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
