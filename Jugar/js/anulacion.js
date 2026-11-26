@@ -49,9 +49,41 @@ function dibujar(lista) {
     tdEstado.appendChild(
       crear("span", s.estado, "badge bg-" + (colores[s.estado] || "secondary")),
     );
+
+    // NUEVO: botones para el admin (el servidor dice si puede con puede_resolver)
+    if (s.puede_resolver) {
+      const btnAprobar = crear("button", "Aprobar", "btn btn-sm btn-success ms-2");
+      const btnRechazar = crear("button", "Rechazar", "btn btn-sm btn-outline-danger ms-1");
+      btnAprobar.addEventListener("click", () => resolver(s.id_solicitud, "aprobar"));
+      btnRechazar.addEventListener("click", () => resolver(s.id_solicitud, "rechazar"));
+      tdEstado.appendChild(btnAprobar);
+      tdEstado.appendChild(btnRechazar);
+    }
+
     tr.appendChild(tdEstado);
     tbody.appendChild(tr);
   });
+}
+
+// NUEVO: enviar la decisión del admin al servidor
+function resolver(id, accion) {
+  fetch("api/resolver_solicitud.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id_solicitud: id, accion: accion }),
+  })
+    .then((r) => r.json())
+    .then((res) => {
+      if (res.ok) {
+        mostrarMensaje("success", "Solicitud " + res.estado + ".");
+        cargar();
+      } else {
+        mostrarMensaje("danger", res.error);
+      }
+    })
+    .catch(() =>
+      mostrarMensaje("danger", "Error de comunicación con el servidor."),
+    );
 }
 
 function cargar() {
@@ -110,4 +142,4 @@ btnEnviar.addEventListener("click", () => {
 });
 
 cargar();
-})();
+})();
