@@ -88,10 +88,11 @@ btnEnviar.addEventListener("click", () => {
     .then((r) => r.json())
     .then((res) => {
       if (res.ok) {
-        mostrarMensaje(
-          "success",
-          "Solicitud enviada para el ticket " + res.codigo + ".",
-        );
+        if (res.estado === "aprobada") {
+          mostrarMensaje("success", "Ticket " + res.codigo + " anulado correctamente.");
+        } else {
+          mostrarMensaje("warning", "Pasaron más de 5 minutos. La solicitud del ticket " + res.codigo + " quedó pendiente para el administrador.");
+        }
         inpCodigo.value = "";
         inpMotivo.value = "";
         contador.textContent = "0";
